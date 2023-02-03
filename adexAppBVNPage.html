@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="adexApp.css" />
+    <link href="fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <title>Adex Bank Bill Payment Page</title>
+  </head>
+  <body onload="genBVN()">
+    <div class="w-100 login d-flex justify-content-between">
+      <div class="d-flex text-white mt-auto mb-auto">
+        <i class="fas fa-angle-left fs-1" onclick="goBack()"></i>
+        <h4>My BVN</h4>
+      </div>
+      <img src="pic/ade.png" alt="" class="login-img" />
+    </div>
+
+    <div class="px-4 pt-4" style="margin-top: 60px;">
+        <div id="bvnDiv" class="fs-1 text-center fw-bold text-secondary">
+        </div>
+</div>
+    <footer
+      class="footer-container position-fixed w-100 px-4 bottom-0 py-3 justify-content-between d-flex bg-light"
+      style="z-index: 3"
+    >
+      <div class="d-grid justify-content-center" onclick="showTrans(1)">
+        <i class="fas fa-list fs-2 text-center"></i>
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Overview</label
+        >
+      </div>
+      <div class="d-grid justify-content-center" onclick="showTrans(2)">
+        <i class="fas fa-mobile-alt fs-2 text-center"></i>
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Airtime</label
+        >
+      </div>
+      <div class="d-grid justify-content-center" onclick="showTrans(3)">
+        <i class="fas fa-exchange-alt fs-2 text-center"></i>
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Transfer</label
+        >
+      </div>
+      <div class="d-grid justify-content-center" onclick="showTrans(4)">
+        <i class="fas fa-credit-card-alt fs-2 text-center"></i>
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Bills</label
+        >
+      </div>
+    </footer>
+
+    <div
+      class="offcanvas offcanvas-start w-75"
+      data-bs-scroll="true"
+      tabindex="-1"
+      id="offcanvasWithBothOptions"
+      aria-labelledby="offcanvasWithBothOptionsLabel"
+    >
+      <div
+        class="offcanvas-header"
+        style="background-color: rgb(235, 0, 0); height: 80px"
+      >
+        <h5
+          class="offcanvas-title text-white text-uppercase mt-auto"
+          id="offcanvasName"
+        ></h5>
+        <img
+          src="pic/ade.png"
+          alt=""
+          class="login-img"
+          style="height: 40px"
+        />
+      </div>
+      <!-- <div class="offcanvas-body">
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-list fs-3"></i> Overview
+        </button>
+        <button onclick="showTrans(3)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-exchange-alt fs-3"></i> Transfer
+        </button>
+        <button onclick="showTrans(2)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-mobile-alt fs-3"></i> airtime recharge
+        </button>
+        <button onclick="showTrans(4)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-mobile-alt fs-3"></i> data bundles
+        </button>
+        <button onclick="showTrans(4)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-credit-card-alt fs-3"></i> bills payment
+        </button>
+        <button onclick="showTrans(5)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+        <i class="fas fa-qrcode fs-3"></i> QR payments
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-folder-open fs-3"></i> connect to eNaira wallet
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-right-left fs-3"></i> schedule payments
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-credit-card fs-3"></i> cards
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-credit-card fs-3"></i> cheques
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-plane-departure fs-3"></i> travel and leisure
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-lightbulb fs-3"></i> bank services
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-envelope-open fs-3"></i> messages
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-gear fs-3"></i> settings
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-location fs-3"></i> adex near me
+        </button>
+      </div> -->
+      <div
+        class="offcanvas-footer d-flex gap-4 text-danger"
+        style="padding: 2px 23px"
+      >
+        <i class="fas fa-power-off fs-3"></i>
+        Sign Out
+      </div>
+    </div>
+
+    <script src="adexApp.js"></script>
+    <script src="bootstrap.js"></script>
+  </body>
+</html>

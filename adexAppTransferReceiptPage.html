@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="adexApp.css" />
+    <link href="fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <title>Adex Bank Transfer Receipt Page</title>
+  </head>
+  <body onload="genReceipt()">
+    <div class="w-100 login d-flex justify-content-between">
+      <div class="d-flex text-white mt-auto mb-auto">
+        <i class="fas fa-angle-left fs-1" onclick="goBack()"></i>
+        <h4>Transfer Receipt</h4> 
+      </div>
+      <img src="pic/ade.png" alt="" class="login-img" />
+    </div>
+    <div class="px-4 pt-4" style="margin-top: 60px; padding-bottom: 80px">
+      <div class="border border-1 py-3 px-4" style="border-radius: 10px">
+        <div class="d-flex justify-content-around">
+          <h6 class="text-uppercase text-secondary my-auto">
+            transaction receipt
+          </h6>
+          <div class="my-auto d-flex gap-1">
+            <img
+              src="pic/ade.png"
+              class="my-auto"
+              style="width: 15px"
+              alt=""
+            />
+            <!-- <img
+              src="pic/1200px-adex_Bank_Logo.svg (2)_1.png"
+              class="my-auto"
+              style="width: 35px; height: 10px"
+              alt=""
+            /> -->
+          </div>
+        </div>
+        <div class="text-capitalize" style="font-size: 10px;" id="receiptContainer">
+          
+        </div>
+      </div>
+      <div class="d-flex w-100 justify-content-between position-relative my-4 gap-3">
+        <button class="btn btn-lg bg-black col-6 text-uppercase text-white">save</button>
+        <button class="btn btn-lg col-6 text-uppercase text-white" style="background-color: rgb(235, 0, 0);">share</button>
+      </div>
+    </div>
+    <script src="adexApp.js"></script>
+    <script src="bootstrap.js"></script>
+  </body>
+</html>

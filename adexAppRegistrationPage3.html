@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="adexApp.css" />
+    <link href="fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <title>Adex Bank registrationPage1</title>
+  </head>
+  <body onload="put()">
+    <div class="w-100 login d-flex justify-content-between">
+      <div class="d-flex text-white mt-auto mb-auto">
+        <i class="fas fa-angle-left fs-1" onclick="goBack()"></i>
+        <h4>Registration 3/3</h4>
+      </div>
+      <img src="pic/ade.png" alt="" class="login-img" />
+    </div>
+    <div class="w-100 p-4" style="margin-top: 60px">
+      <div id="accNo"></div>
+      <div class="w-100 d-flex mt-2 justify-content-between">
+        <div id="mumu" class=""></div>
+        <div class="form-check form-switch">
+          <label for="otp" id="otpLabel">Show OTP</label>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch" checked
+            onclick="displayOTP()" id="showOTP"
+          />
+        </div>
+      </div>
+      <div class="mb-4 mt-3">
+        <label for="validationCustom02" class="form-label fw-bold"
+          >Account Password</label
+        >
+        <input
+          type="password"
+          class="form-control form-control-lg"
+          id="accPass"
+          required
+        />
+      </div>
+      <div class="mb-4 mt-3">
+        <label for="validationCustom02" class="form-label fw-bold"
+          >Confirm Password</label
+        >
+        <input
+          type="password"
+          class="form-control form-control-lg"
+          id="confirmAccPass"
+          required
+          
+        />
+      </div>
+      <div class="mb-4 mt-3">
+        <label for="validationCustom02" class="form-label fw-bold"
+          >Transaction PIN</label
+        >
+        <input
+          type="password"
+          pattern="[0-9]*"
+          inputmode="numeric"
+          maxlength="4"
+          class="form-control form-control-lg"
+          id="transPIN"
+          required
+        />
+      </div>
+
+      <div class="mb-4 mt-3">
+        <label for="validationCustom02" class="form-label fw-bold"
+          >Confirm PIN</label
+        >
+        <input
+          type="password"
+          pattern="[0-9]*"
+          inputmode="numeric"
+          maxlength="4"
+          class="form-control form-control-lg"
+          id="confirmTransPIN"
+          required
+        />
+      </div>
+      <div class="mb-4 mt-3">
+        <label for="validationCustom02" class="form-label fw-bold">OTP</label>
+        <input
+          type="number"
+          class="form-control form-control-lg"
+          id="supplyOTP"
+          required
+        />
+      </div>
+      <div>
+        <button
+          class="btn btn-secondary w-100 mt-3 mb-4 pt-3 pb-3 text-uppercase"
+          id="continueBtn3"
+          onclick="continueReg3()"
+        >
+          confirm
+        </button>
+      </div>
+    </div>
+    
+    
+
+    <div id="regSuccessModalContainer" class="my-modal">
+      <div id="successModal">
+        <div class="success-modal-content">
+          <div class="success-modal-header">
+            <h5 class="my-auto">Success</h5>
+              <button class="btn btn-lg px-4 d-flex">
+                <i class="fas fa-times text-secondary fs-1 my-auto" onclick="closeMyRegSuccessModal()"></i>
+              </button>
+          </div>
+          <div class="success-modal-body w-100 px-5 py-4 d-grid">
+            <div id="successConfirm" class="text-center mb-5" style="font-size: 12px"></div>
+            <div class="w-100 d-flex justify-content-center">
+              <div class="d-flex justify-content-center" style="width: 80px; height: 80px; border-radius: 50%; border: 5px solid green;"><i class="fas fa-check my-auto" style="font-size: 30px; color: rgb(49, 181, 49);"></i></div>
+            </div>
+            <button class="btn btn-lg border border-1 w-100 d-flex justify-content-center" style="margin-top: 60px;" onclick="`${window.location.href = 'adexAppHomePage.html'}`">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="adexApp.js"></script>
+    <script src="bootstrap.js"></script>
+  </body>
+</html>

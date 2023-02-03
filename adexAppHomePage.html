@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="adexApp.css" />
+    <link href="fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <title>Adex Bank App</title>
+  </head>
+  <body onload="checkNetwork()" id="body">
+    <div
+      class="position-absolute top-0 bg-black text-white py-4 w-100 text-center"
+      style="z-index: 5"
+      id="networkDiv"
+    ></div>
+    <img src="pic/ade.png" alt="" class="logo" />
+    <div class="notification-bell" onclick="toNotification()">
+      <i class="fas fa-bell mt-auto mb-auto fs-1"></i>
+    </div>
+    <div
+      id="carouselExampleCaptions"
+      class="carousel slide w-100 h-100"
+      data-bs-ride="false"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div class="carousel-inner h-100 ">
+        <div class="carousel-item h-100 active ">
+          <img src="pic/back5.jpeg" class="d-block w-100 h-100  saturate" alt="..." />
+          <div class="carousel-caption text-start d-md-block w-100">
+            <h5 class="fw-bold fs-2">Easy Banking</h5>
+            <p>Experience a whole new world of banking simplified.</p>
+          </div>
+        </div>
+        <div class="carousel-item h-100">
+          <img src="pic/back4.jpg" class="d-block w-100 h-100 saturate" alt="..." />
+          <div class="carousel-caption text-start d-md-block w-100">
+            <h5 class="fw-bold fs-2">Scheduled Payments</h5>
+            <p>
+              Automate your transfers, airtime purchases and bills payment
+              easily.
+            </p>
+          </div>
+        </div>
+        <div class="carousel-item h-100">
+          <img src="pic/back3.jpg" class="d-block w-100 h-100 saturate" alt="..." />
+          <div class="carousel-caption text-start d-md-block w-100">
+            <h5 class="fw-bold fs-2">EaZyLinks</h5>
+            <p>
+              Personalize your banking experience by choosing preferred banking
+              services.
+            </p>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <div class="login-container w-100">
+      <button class="btn btn-light col-12 p-2 fw-bold" onclick="toLogin()">
+        Log In
+      </button>
+      <hr
+        class="text-light mt-4"
+        style="border-top: 2px solid rgb(255, 255, 255)"
+      />
+      <div class="register-container text-white d-flex justify-content-between">
+        <span onclick="toRegister()" style="cursor: pointer">Register</span>
+        <span onclick="toOpenAcc()" style="cursor: pointer">Open Account</span>
+        <span onclick="toHelp()" style="cursor: pointer">Help</span>
+      </div>
+    </div>
+    <script src="adexApp.js"></script>
+    <script src="bootstrap.js"></script>
+  </body>
+</html>

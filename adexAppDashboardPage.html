@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="adexApp.css" />
+    <link href="fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <title>Adex Bank DashboardPage</title>
+  </head>
+  <body onload="genDashboard()">
+    <div class="w-100 login d-flex justify-content-between">
+      <div class="d-flex text-white mt-auto mb-auto">
+        <i
+          class="fas fa-bars fs-3"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasWithBothOptions"
+          aria-controls="offcanvasWithBothOptions"
+        ></i>
+        <h4>Overview</h4>
+      </div>
+      <img src="pic/ade.png" alt="" class="login-img" />
+    </div>
+    <div class="d-grid position-absolute w-100" style="margin-top: 60px; padding-bottom: 100px; overflow-y: auto;">
+      <div class="py-2 px-4 position-relative">
+        <div id="dashboardAccNo"></div>
+        <hr />
+        <div
+          class="text-uppercase fs-6 fw-bold"
+          style="position: relative;"
+          id="dashboardName"
+        >
+        </div>
+        <div class="d-flex w-100 justify-content-between my-2">
+          <div class="d-flex my-auto"><div class="fs-2 fw-bold my-auto">₦</div><div type="number" class="form-control fs-3 my-auto fw-bold" style="background-color: inherit; border: none; width: 150px;" id="totalBalance" placeholder="00.0" disabled></div></div>
+          <!-- <input type="number" class="form-control w-25" value="" id="mumuInput"> -->
+          <div class="d-flex gap-3 my-auto">
+            <label class="form-check-label" for="flexSwitchCheckChecked" id="balanceLabel"
+              >Hide balance</label
+            >
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                onclick="switchType()" id="switchInput"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex w-100 bg-secondary justify-content-between text-white px-4 position-relative"
+        style="height: 30px"
+      >
+        <div class="d-flex gap-2"><div class="my-auto">Ledger Balance: ₦</div><div class="my-auto" id="ledgerBalance"></div></div>
+        <div class="d-flex gap-2 my-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <i class="fas fa-calendar my-auto"></i>
+          <label class="form-check-label" for="flexSwitchCheckChecked"
+            >History</label
+          >
+        </div>
+      </div>
+     <!-- <div id="dp"></div>
+      <div id="bal"></div>
+      <input type="number" value="" id="mum">
+      <button class="btn btn-danger col-6 d-flex mx-auto my-2 justify-content-center" onclick="deposit()">deposit</button> -->
+      <div class="w-100 mt-3 px-4 position-relative">
+        <div>eaZyLinks</div>
+        <hr />
+        <div class="w-100 py-0 d-flex justify-content-between">
+          <div class="d-flex flex-column" style="width: 23%; height: 80px;">
+            <img src="pic/qr-removebg-preview.png" alt="" style="width: 100%; height: 100%;">
+            <span style="font-size: 9px; text-align: center;">QR Payments</span>
+          </div>
+          <div class="d-flex flex-column" style="width: 23%; height: 80px;" onclick="toTravelPage()">
+            <img src="pic/leisure2-removebg-preview.png" alt="" style="width: 100%; height: 100%;" >
+            <span style="font-size: 9px; text-align: center;">Travel & Leisure</span>
+          </div>
+          <div class="d-flex flex-column" style="width: 23%; height: 80px;">
+            <img src="pic/tv-removebg-preview.png" alt="" style="width: 100%; height: 100%;">
+            <span style="font-size: 9px; text-align: center;">Cable TV</span>
+          </div>
+          <div class="d-flex flex-column" style="width: 23%; height: 80px;">
+            <img src="pic/cards.png" alt="" style="width: 60%; height: 100%;  object-fit: contain; margin-left: auto; margin-right: auto;">
+            <span style="font-size: 9px; text-align: center;">Cards</span>
+          </div>
+        </div>
+        <hr />
+        <div class="w-100 py-0 d-flex justify-content-between">
+          <div class="d-flex flex-column" style="width: 23%; height: 80px;" onclick="toBVNPage()">
+            <img src="pic/fingerprint.png" alt="" style="width: 60%; height: 100%; object-fit: contain; margin-left: auto; margin-right: auto ;">
+            <span style="font-size: 9px; text-align: center;">MyBVN</span>
+          </div>
+          <div class="d-flex flex-column" style="width: 23%; height: 80px;">
+            <img src="pic/transfer.png" alt="" style="width: 60%; height: 100%; object-fit: contain; margin-left: auto; margin-right: auto ;">
+            <span style="font-size: 9px; text-align: center;">Scheduled Payments</span>
+          </div>
+          <div class="d-flex flex-column" style="width: 23%; height: 80px;">
+            <img src="pic/customize.png" alt="" style="width: 60%; height: 100%; object-fit: contain; margin-left: auto; margin-right: auto ;">
+            <span style="font-size: 9px; text-align: center;">Customize eaZylinks</span>
+          </div>
+          <div class="d-flex flex-column" style="width: 23%; height: 80px;" onclick="toSettings()">
+            <img src="pic/settings.png" alt="" style="width: 60%; height: 100%; object-fit: contain; margin-left: auto; margin-right: auto ;">
+            <span style="font-size: 9px; text-align: center;">Settings</span>
+          </div>
+        </div>
+        <hr />
+          <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <!-- <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div> -->
+            <div class="carousel-inner" style="width: 100%; height: 100px;">
+              <div class="carousel-item active h-100 w-100" data-bs-interval="10000">
+                <img src="pic/win.jpeg" class="d-block w-100 h-100" alt="..." style="object-fit: fill; object-position: 100% 100%;">
+              </div>
+              <div class="carousel-item h-100" data-bs-interval="2000">
+                <img src="pic/win3.jpeg" class="d-block w-100" alt="..." style="object-fit: fill; object-position: 100% 100%;">
+              </div>
+              <div class="carousel-item h-100">
+                <img src="pic/win4.webp" class="d-block w-100" alt="..." style="object-fit: fill; object-position: 100% 100%;">
+              </div>
+            </div>
+            <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button> -->
+          </div>
+      </div>
+    </div>
+    <footer
+      class="footer-container position-fixed w-100 px-4 bottom-0 py-3 justify-content-between d-flex bg-light"
+    >
+      <div class="d-grid justify-content-center" onclick="showTrans(1)">
+        <i class="fas fa-list fs-2 text-center"></i>
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Overview</label
+        >
+      </div>
+      <div class="d-grid justify-content-center" onclick="showTrans(2)">
+        <i class="fas fa-mobile-alt fs-2 text-center"></i>
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Airtime</label
+        >
+      </div>
+      <div class="d-grid justify-content-center" onclick="showTrans(3)">
+        <i class="fas fa-exchange-alt fs-2 text-center"></i>
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Transfer</label
+        >
+      </div>
+      <div class="d-grid justify-content-center" onclick="showTrans(4)">
+        <i class="fas fa-credit-card-alt fs-2 text-center"></i>
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Bills</label
+        >
+      </div>
+    </footer>
+
+    <div
+      class="offcanvas offcanvas-start w-75"
+      data-bs-scroll="true"
+      tabindex="-1"
+      id="offcanvasWithBothOptions"
+      aria-labelledby="offcanvasWithBothOptionsLabel"
+    >
+      <div
+        class="offcanvas-header"
+        style="background-color: rgb(235, 0, 0); height: 80px"
+      >
+        <h5
+          class="offcanvas-title text-white text-uppercase mt-auto"
+          id="offcanvasName"
+        >
+        </h5>
+        <img
+          src="pic/ade.png"
+          alt=""
+          class="login-img"
+          style="height: 40px"
+        />
+      </div>
+      <div class="offcanvas-body">
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-list fs-3"></i> Overview
+        </button>
+        <button onclick="showTrans(3)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-exchange-alt fs-3"></i> Transfer
+        </button>
+        <button onclick="showTrans(2)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-mobile-alt fs-3"></i> airtime recharge
+        </button>
+        <button onclick="showTrans(4)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-mobile-alt fs-3"></i> data bundles
+        </button>
+        <button onclick="showTrans(4)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-credit-card-alt fs-3"></i> bills payment
+        </button>
+        <button onclick="showTrans(5)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+        <i class="fas fa-qrcode fs-3"></i> QR payments
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-folder-open fs-3"></i> connect to eNaira wallet
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-right-left fs-3"></i> schedule payments
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-credit-card fs-3"></i> cards
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-credit-card fs-3"></i> cheques
+        </button>
+        <button onclick="toTravelPage()"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-plane-departure fs-3"></i> travel and leisure
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-lightbulb fs-3"></i> bank services
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-envelope-open fs-3"></i> messages
+        </button>
+        <button onclick="showTrans(14)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-gear fs-3"></i> settings
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-location fs-3"></i> Adex near me
+        </button>
+      </div>
+      <div class="offcanvas-footer d-flex gap-4 text-danger" style="padding: 2px 23px;" onclick="logOut()">
+        <i class="fas fa-power-off fs-3"></i>
+        Sign Out
+      </div>
+    </div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding: 0px !important; border-radius: unset !important">
+  <div class="modal-dialog position-fixed start-0 end-0 w-100 d-flex flex-column" style="top: 220px; bottom: 50px; margin-left: auto; margin-right: auto;">
+    <div class="modal-content w-100" style="overflow-y: scroll;">
+      <div class="modal-header">
+      </div>
+      <div class="modal-body">
+        <div id="historyAlert" class="fs-2 w-100 text-center"></div>
+        <div id="historyContainer" class="d-grid gap-2"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Delete Alll</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <script src="adexApp.js"></script>
+    <script src="bootstrap.js"></script>
+  </body>
+</html>

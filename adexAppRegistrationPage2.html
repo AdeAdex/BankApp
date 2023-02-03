@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="adexApp.css" />
+    <link href="fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <title>Adex Bank registrationPage2</title>
+  </head>
+  <body>
+    <div class="w-100 login d-flex justify-content-between">
+      <div class="d-flex text-white mt-auto mb-auto">
+        <i
+          class="fas fa-angle-left fs-1"
+          onclick="goBack()"
+        ></i>
+        <h4>Registration 2/3</h4>
+      </div>
+      <img src="pic/ade.png" alt="" class="login-img" />
+    </div>
+    <div class="login-main p-4">
+      <div class="mb-4">
+        <h5 class="text-capitalize mb-4">select registration modes</h5>
+        <div class="gap-4 d-flex">
+          <button
+            class="btn btn-light border border-danger d-grid py-2 px-3"
+            style="height: 100px; width: 100px"
+            onclick="userSelect('token')"
+          >
+          <div class="w-100 d-flex justify-content-end" id="mySelect1"></div>
+            <div class="w-50 mt-auto">Hardware Token</div>
+          </button>
+          <button
+            class="btn btn-light border border-danger d-grid py-2 px-3"
+            style="height: 100px; width: 100px"
+            onclick="userSelect('card')"
+          >
+          <div class="w-100 d-flex justify-content-end" id="mySelect2"></div>
+            <div class="w-50 mt-auto">Debit Card</div>
+          </button>
+          <button
+            class="btn btn-light border border-danger d-grid py-2 px-3"
+            style="height: 100px; width: 100px"
+            onclick="userSelect('otp')"
+          >
+          <div class="w-100 d-flex justify-content-end" id="mySelect3"></div>
+            <div class="w-50 mt-auto">OTP</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-5" id="registrationType">
+        
+      </div>
+      <div>
+        <button
+          class="btn btn-secondary w-100 mt-3 mb-4 pt-3 pb-3 text-uppercase"
+          id="continueBtn2"
+          onclick="continueReg2()"
+        >
+          continue
+        </button>
+      </div>
+    </div>
+    <div id="you"></div>
+    <script src="adexApp.js"></script>
+    <script src="bootstrap.js"></script>
+  </body>
+</html>

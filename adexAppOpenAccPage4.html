@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="adexApp.css" />
+    <link href="fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <title>Adex Bank Open Account Page 4</title>
+  </head>
+  <body>
+    <div class="w-100 login d-flex justify-content-between">
+      <div class="d-flex text-white mt-auto mb-auto">
+        <i
+          class="fas fa-angle-left fs-1"
+          onclick="goBack()"
+        ></i>
+        <h4>Open Account</h4>
+      </div>
+      <img src="pic/ade.png" alt="" class="login-img" />
+    </div>
+    <div class="w-100 text-center" style="margin-top: 60px">
+      <img
+        src="pic/adexOpenAcc.jpg"
+        alt=""
+        class="w-100 bg-black position-fixed"
+        style="
+          object-fit: 10% 20%;
+          object-position: 10% 10%;
+          top: 60px;
+          left: 0;
+        "
+      />
+    </div>
+    <div
+      class="bg-light position-fixed w-100 px-4 py-4"
+      style="
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        z-index: 2;
+        top: 33%;
+        bottom: 0;
+        overflow-y: scroll;
+      "
+    >
+      <div class="w-100 d-flex gap-4 my-4">
+        <span
+          class="py-2 px-3 fw-bold"
+          style="
+            background-color: rgba(128, 128, 128, 0.396);
+            border-radius: 20px;
+          "
+          >Step 4 of 5</span
+        >
+        <h5 class="my-auto">Provide us some details</h5>
+      </div>
+      <h3 class="d-flex justify-content-start text-start mt-5 mb-4">
+        Well done , now tell us more about you..
+      </h3>
+      <div class="w-100 d-grid">
+        <div class="mb-4">
+          <label
+            for="validationCustom02"
+            class="form-label w-100 fs-3"
+            >Occupation</label
+          >
+          <select
+            class="form-select  form-select-md w-100"
+            aria-label=".form-select-md"
+            id="occupation"
+          >
+            <option value=""></option>
+            <option value="dev">Developer</option>
+            <option value="bank">Banker</option>
+            <option value="lagos">lagos state</option>
+            <option value="ondo">ondo state</option>
+            <option value="ogun">ogun state</option>
+            <option value="kwara">kwara state</option>
+            <option value="ekiti">ekiti state</option>
+            <option value="akwaibom">akwa ibom state</option>
+            <option value="imo">imo state</option>
+            <option value="abia">abia state</option>
+            <option value="rivers">rivers state</option>
+            <option value="anambra">anambra state</option>
+            <option value="kano">kano state</option>
+            <option value="kaduna">kaduna state</option>
+            <option value="benue">benue state</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label
+            for="validationCustom02"
+            class="form-label w-100 fs-3"
+            >State of Origin</label
+          >
+          <select
+            class="form-select  form-select-md w-100"
+            aria-label=".form-select-md"
+            id="stateOrigin"
+          >
+            <option value=""></option>
+            <option value="oyo">oyo state</option>
+            <option value="osun">osun state</option>
+            <option value="lagos">lagos state</option>
+            <option value="ondo">ondo state</option>
+            <option value="ogun">ogun state</option>
+            <option value="kwara">kwara state</option>
+            <option value="ekiti">ekiti state</option>
+            <option value="akwaibom">akwa ibom state</option>
+            <option value="imo">imo state</option>
+            <option value="abia">abia state</option>
+            <option value="rivers">rivers state</option>
+            <option value="anambra">anambra state</option>
+            <option value="kano">kano state</option>
+            <option value="kaduna">kaduna state</option>
+            <option value="benue">benue state</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label
+            for="validationCustom02"
+            class="form-label w-100 fs-3"
+            >State of Residence</label
+          >
+          <select
+          class="form-select  form-select-md w-100"
+          aria-label=".form-select-md"
+          id="stateResidence"
+        >
+          <option value=""></option>
+          <option value="oyo">oyo state</option>
+          <option value="osun">osun state</option>
+          <option value="lagos">lagos state</option>
+          <option value="ondo">ondo state</option>
+          <option value="ogun">ogun state</option>
+          <option value="kwara">kwara state</option>
+          <option value="ekiti">ekiti state</option>
+          <option value="akwaibom">akwa ibom state</option>
+          <option value="imo">imo state</option>
+          <option value="abia">abia state</option>
+          <option value="rivers">rivers state</option>
+          <option value="anambra">anambra state</option>
+          <option value="kano">kano state</option>
+          <option value="kaduna">kaduna state</option>
+          <option value="benue">benue state</option>
+        </select>
+        </div>
+        <div class="mb-4">
+          <label
+            for="validationCustom02"
+            class="form-label w-100 fs-3"
+            >Residential Address</label
+          >
+          <textarea
+            name=""
+            id="rAddress"
+            cols="60"
+            rows="2"
+            class="fs-2 text-uppercase py-2 px-3 w-100"
+          ></textarea>
+        </div>
+        <div class="w-100 d-flex gap-4 mt-3 mb-2">
+          <input
+            type="checkbox"
+            name=""
+            id=""
+            checked
+            class=""
+            style="width: 18px"
+          />
+          <h3>Get an instant virtual card</h3>
+        </div>
+      </div>
+      <div class="w-100 d-grid gap-4 mt-3 mb-2">
+        <button
+          class="btn form-control p-2 text-white text-capitalize fs-1 my-3"
+          style="background-color: rgb(235, 0, 0); border-radius: 12px"
+          onclick="toOpenAcc5()" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+        >
+          create
+        </button>
+        <!-- <div class="fs-3 d-flex justify-content-center">
+          <a href="" class="text-decoration-none">Go Back</a>
+        </div> -->
+      </div>
+    </div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Debit Card</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="w-100">
+          <div id="atm" class=" position-relative p-3" style="background-image: url('pic/adexAtmCard.jpeg'); width: 100%; height: 200px; background-color: aqua; background-size: 
+          100% 100%; background-repeat: no-repeat;">
+          <div class="w-100 d-flex justify-content-between">
+            <div class="d-grid gap-1">
+              <img src="pic/images (39).jpeg" alt="" style="rotate: 90deg; width: 30px; margin-left: 20px;" class="">
+            <h4 class="text-white">debit Naira</h4>
+            </div> 
+            <img src="pic/ade.png" alt="" class="" style="width: 40px;" />
+          </div>
+          <img src="pic/images 12.png" alt="" class="" style="width: 40px; height: 30px; margin-left: 20px; margin-top: 5px; margin-bottom: 4px; object-fit: cover; object-position: 100%; border-radius: 5px;">
+            <div class="text-black w-100 d-flex justify-content-center fs-1" style="top: 55%;" id="atmCardNo"></div>
+            <div class="w-100 d-flex">
+              <i class="fas fa-caret-left text-black fs-4"></i>
+              <div class="position-relative mx-auto">
+                <h6 class="text-uppercase text-center" style="font-size: 8px;">month/year</h6>
+                <div class="d-flex gap-2" style="position: relative; top: -5px;">
+                  <h6 class="text-uppercase" style="font-size: 8px;">valid <br> thru</h6>
+                  <h2>03/25</h2>
+                </div>
+              </div>
+            </div>
+            <div class="text-uppercase fs-5 fw-bold" style="top: -15px; width: 80%; position: relative;" id="atmName"></div>
+            <div class="position-absolute" style="bottom: 5px; right: 10px;">
+              <img src="pic/mastercard-logo.png" alt="" style="width: 70px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="window.print()">print</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <script src="adexApp.js"></script>
+    <script src="bootstrap.js"></script>
+  </body>
+</html>

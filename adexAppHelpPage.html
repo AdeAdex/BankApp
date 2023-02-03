@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="adexApp.css" />
+    <link href="fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <title>Adex Bank Help Page</title>
+  </head>
+  <body>
+    <div class="w-100 h-100">
+      <div class="w-100 h-100 bg-white">
+        <div class="w-100 login d-flex justify-content-between">
+          <div class="d-flex text-white mt-auto mb-auto">
+            <i
+              class="fas fa-angle-left fs-1"
+              onclick="goBack()"
+            ></i>
+            <h4>Help</h4>
+          </div>
+          <img src="pic/ade.png" alt="" class="login-img" />
+        </div>
+        <div class="help-container">
+          <button
+            class="btn help-btn btn-white w-100 text-center d-flex justify-content-between p-4"
+            onclick="help(1)"
+          >
+            ContactUs
+            <i class="fas fa-angle-right fs-1 text-secondary"></i>
+          </button>
+          <button
+            class="btn help-btn btn-white w-100 text-center d-flex justify-content-between p-4"
+            onclick="help(2)"
+          >
+            Adex Near Me
+            <i class="fas fa-angle-right fs-1 text-secondary"></i>
+          </button>
+          <button
+            class="btn help-btn btn-white w-100 text-center d-flex justify-content-between p-4"
+            onclick="help(3)"
+          >
+            About
+            <i class="fas fa-angle-right fs-1 text-secondary"></i>
+          </button>
+          <button
+            class="btn help-btn btn-white w-100 text-center d-flex justify-content-between p-4"
+            onclick="help(4)"
+          >
+            FAQ
+            <i class="fas fa-angle-right fs-1 text-secondary"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="variousHelp" class="position-absolute top-0 w-100 bg-white">
+       
+      </div>
+    </div>
+    <script src="adexApp.js"></script>
+    <script src="bootstrap.js"></script>
+  </body>
+</html>

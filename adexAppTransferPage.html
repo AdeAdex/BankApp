@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="adexApp.css" />
+    <link href="fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <title>adex Bank TransferPage</title>
+  </head>
+  <body onload="genAirtime()">
+    <div class="w-100 login d-flex justify-content-between">
+      <div class="d-flex text-white mt-auto mb-auto">
+        <i
+          class="fas fa-bars fs-3"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasWithBothOptions"
+          aria-controls="offcanvasWithBothOptions"
+        ></i>
+        <h4>Transfers</h4>
+      </div>
+      <img src="pic/ade.png" alt="" class="login-img" />
+    </div>
+    
+      <div class="px-4 pt-4" style="margin-top: 60px; padding-bottom: 80px;">
+        <button
+          class="btn btn-outline-secondary text-danger form-control py-2 text-start" onclick="transferHistoryHistory()"
+        >
+          Transfer History
+        </button>
+        <div class="my-4">
+          <h6 class="text-capitalize">select transfer mode</h6>
+          <div class="mb-4">
+            <div
+              class="gap-3 d-flex w-100"
+              style="overflow-x: auto; height: 90px"
+            >
+              <button
+                class="btn btn-light border border-danger d-grid py-2 px-3"
+                style="height: 80px; min-width: 30%"
+                onclick="userSelect('token')"
+              >
+                <div class="d-flex">
+                  <i class="fas fa-user fs-3 text-danger"></i>
+                  <div
+                    class="w-100 d-flex justify-content-end"
+                    id="mySelect1"
+                  ></div>
+                </div>
+                <div class="w-50 mt-auto">Own Account</div>
+              </button>
+              <button
+                class="btn btn-light border border-danger d-grid py-2 px-3"
+                style="height: 80px; min-width: 30%"
+                onclick="userSelect('card')"
+              >
+                <div class="d-flex">
+                  <i class="fas fa-house fs-3 text-danger"></i>
+                  <div
+                    class="w-100 d-flex justify-content-end"
+                    id="mySelect2"
+                  ></div>
+                </div>
+                <div class="w-50 mt-auto">Adex Bank</div>
+              </button>
+              <button
+                class="btn btn-light border border-danger d-grid py-2 px-3"
+                style="height: 80px; min-width: 30%"
+                onclick="userSelect('otp')"
+              >
+                <div class="d-flex">
+                  <i class="fas fa-home fs-3 text-danger"></i>
+                  <div
+                    class="w-100 d-flex justify-content-end"
+                    id="mySelect3"
+                  ></div>
+                </div>
+                <div class="w-50 mt-auto">Other banks</div>
+              </button>
+              <button
+                class="btn btn-light border border-danger d-grid py-2 px-3"
+                style="height: 80px; min-width: 30%"
+                onclick="userSelect('otp')"
+              >
+                <div class="d-flex">
+                  <i class="fas fa-home fs-3 text-danger"></i>
+                  <div
+                    class="w-100 d-flex justify-content-end"
+                    id="mySelect3"
+                  ></div>
+                </div>
+                <div class="w-50 mt-auto">Other banks</div>
+              </button>
+              <button
+                class="btn btn-light border border-danger d-grid py-2 px-3"
+                style="height: 80px; min-width: 30%"
+                onclick="userSelect('otp')"
+              >
+                <div class="d-flex">
+                  <i class="fas fa-home fs-3 text-danger"></i>
+                  <div
+                    class="w-100 d-flex justify-content-end"
+                    id="mySelect3"
+                  ></div>
+                </div>
+                <div class="w-50 mt-auto">Other banks</div>
+              </button>
+              <button
+                class="btn btn-light border border-danger d-grid py-2 px-3"
+                style="height: 80px; min-width: 30%"
+                onclick="userSelect('otp')"
+              >
+                <div class="d-flex">
+                  <i class="fas fa-home fs-3 text-danger"></i>
+                  <div
+                    class="w-100 d-flex justify-content-end"
+                    id="mySelect3"
+                  ></div>
+                </div>
+                <div class="w-50 mt-auto">Other banks</div>
+              </button>
+            </div>
+          </div>
+          <div class="mb-2">
+            <label
+              for="validationCustom02"
+              class="form-label w-100 fs-6"
+              style="text-align: left"
+              >Select Source Account</label
+            >
+            <button
+            type="text"
+            class="form-control form-control-md d-flex justify-content-between text-uppercase"
+            id="airtimeMNumber"
+            placeholder=""
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            style="background-color: inherit"
+          >
+            Select Account <i class="fas fa-angle-down my-auto"></i>
+          </button>
+          </div>
+          <div class="mb-2">
+            <label
+              for="validationCustom02"
+              class="form-label w-100 fs-6"
+              style="text-align: left"
+              >Select Destination Account</label
+            >
+            <select
+            class="form-select form-select-md w-100 text-uppercase"
+            aria-label=".form-select-md"
+            id="banks"
+          >
+            <option class="text-uppercase" value="">Select Bank</option>
+            <option class="text-uppercase" value="access bank">access bank</option>
+            <option class="text-uppercase" value="eco bank">eco bank</option>
+            <option class="text-uppercase" value="fidelity bank">fidelity bank</option>
+            <option class="text-uppercase" value="first bank">first bank</option>
+            <option class="text-uppercase" value="guaranty trust bank">guaranty trust bank</option>
+            <option class="text-uppercase" value="heritage bank">heritage bank</option>
+            <option class="text-uppercase" value="jaiz bank">jaiz bank</option>
+            <option class="text-uppercase" value="kuda microfinance bank">kuda microfinance bank</option>
+            <option class="text-uppercase" value="lapo microfinance bank">lapo microfinance bank</option>
+            <option class="text-uppercase" value="lotus bank">lotus bank</option>
+            <option class="text-uppercase" value="moneytrust microfinance bank">moneytrust microfinance bank</option>
+            <option class="text-uppercase" value="opay">opay</option>
+            <option class="text-uppercase" value="optimus bank">optimus bank</option>
+            <option class="text-uppercase" value="palmpay">palmpay</option>
+            <option class="text-uppercase" value="polaris bank limited">polaris bank limited</option>
+            <option class="text-uppercase" value="premium trust bank">premium trust bank</option>
+            <option class="text-uppercase" value="providus bank">providus bank</option>
+            <option class="text-uppercase" value="stanbic-ibtc bank plc">stanbic-ibtc bank plc</option>
+            <option class="text-uppercase" value="standard chartered bank">standard chartered bank</option>
+            <option class="text-uppercase" value="sterling bank">sterling bank</option>
+            <option class="text-uppercase" value="uba plc">uba plc.</option>
+            <option class="text-uppercase" value="union bank">union bank</option>
+            <option class="text-uppercase" value="unity bank">unity bank</option>
+            <option class="text-uppercase" value="wema bank plc">wema bank plc</option>
+            <option class="text-uppercase" value="zenith bank plc">zenith bank plc</option>
+          </select>
+          </div>
+          <div class="mb-2">
+            <label
+              for="validationCustom02"
+              class="form-label w-100 fs-6"
+              style="text-align: left"
+              >Enter Destination Account</label
+            >
+            <input
+            type="number"
+            pattern="/^-?\d+\.?\d*$/"
+            onKeyPress="if(this.value.length==10) return false;"
+            onblur="checkForThisAccNo()"
+            pattern="[0-9]*"
+            maxlength="10"
+            class="form-control form-control-md"
+            id="accountTo"
+            value=""
+            required
+            placeholder="Account Number"
+          />
+          </div>
+          <div class="mb-2" id="nameName" style="display: block;">
+            <label
+              for="validationCustom02"
+              class="form-label w-100 fs-6"
+              style="text-align: left"
+              >Account Name</label
+            >
+            <button
+            type="text"
+            class="form-control form-control-md d-flex justify-content-between text-uppercase"
+            id="accountNameTo"
+            style="background-color: inherit"
+          >Account Name
+          </button>
+          </div>
+          <div class="mb-2">
+            <label
+              for="validationCustom02"
+              class="form-label w-100 fs-6"
+              style="text-align: left"
+              >Amount</label
+            >
+            <input
+              type="number"
+              pattern="/^-?\d+\.?\d*$/"
+              onKeyPress="if(this.value.length==10) return false;"
+              pattern="[0-9]*"
+              maxlength="10"
+              class="form-control form-control-md"
+              id="transAmountTo"
+              value=""
+              required
+              placeholder="0.00"
+            />
+          </div>
+          <div class="mb-2">
+            <label
+              for="validationCustom02"
+              class="form-label w-100 fs-6"
+              style="text-align: left"
+              >Transaction Description</label
+            >
+            <input
+              type="text"
+              class="form-control form-control-md text-capitalize"
+              placeholder="Transaction Description"
+              id="descriptn"
+            />
+          </div>
+          <div class="d-flex justify-content-between my-4">
+            <h6>Schedule Transfer</h6>
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id=""
+              />
+            </div>
+          </div>
+          <hr>
+        </div>
+        <button class="text-uppercase btn btn-secondary form-control" onclick="confirmTransferTrans()">
+          continue
+        </button>
+      </div>
+    <footer
+      class="footer-container position-fixed w-100 px-4 bottom-0 py-3 justify-content-between d-flex bg-light"
+      style="z-index: 3"
+    >
+      <div class="d-grid justify-content-center" onclick="showTrans(1)">
+        <i class="fas fa-list fs-2 text-center"></i>
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Overview</label
+        >
+      </div>
+      <div class="d-grid justify-content-center" onclick="showTrans(2)">
+        <i class="fas fa-mobile-alt fs-2 text-center"></i>
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Airtime</label
+        >
+      </div>
+      <div class="d-grid justify-content-center" onclick="showTrans(3)">
+        <i class="fas fa-exchange-alt fs-2 text-center"></i>
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Transfer</label
+        >
+      </div>
+      <div class="d-grid justify-content-center" onclick="showTrans(4)">
+        <i class="fas fa-credit-card-alt fs-2 text-center"></i>
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Bills</label
+        >
+      </div>
+    </footer>
+
+    <div
+      class="offcanvas offcanvas-start w-75"
+      data-bs-scroll="true"
+      tabindex="-1"
+      id="offcanvasWithBothOptions"
+      aria-labelledby="offcanvasWithBothOptionsLabel"
+    >
+      <div
+        class="offcanvas-header"
+        style="background-color: rgb(235, 0, 0); height: 80px"
+      >
+        <h5
+          class="offcanvas-title text-white text-uppercase mt-auto"
+          id="offcanvasName"
+        ></h5>
+        <img
+          src="pic/ade.png"
+          alt=""
+          class="login-img"
+          style="height: 40px"
+        />
+      </div>
+      <div class="offcanvas-body">
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-list fs-3"></i> Overview
+        </button>
+        <button onclick="showTrans(3)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-exchange-alt fs-3"></i> Transfer
+        </button>
+        <button onclick="showTrans(2)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-mobile-alt fs-3"></i> airtime recharge
+        </button>
+        <button onclick="showTrans(4)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-mobile-alt fs-3"></i> data bundles
+        </button>
+        <button onclick="showTrans(4)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-credit-card-alt fs-3"></i> bills payment
+        </button>
+        <button onclick="showTrans(5)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+        <i class="fas fa-qrcode fs-3"></i> QR payments
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-folder-open fs-3"></i> connect to eNaira wallet
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-right-left fs-3"></i> schedule payments
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-credit-card fs-3"></i> cards
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-credit-card fs-3"></i> cheques
+        </button>
+        <button onclick="toTravelPage()"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-plane-departure fs-3"></i> travel and leisure
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-lightbulb fs-3"></i> bank services
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-envelope-open fs-3"></i> messages
+        </button>
+        <button onclick="showTrans(14)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-gear fs-3"></i> settings
+        </button>
+        <button onclick="showTrans(1)"
+          class="btn w-100 d-flex gap-4 text-capitalize"
+          style="border-bottom: 1px solid rgba(128, 128, 128, 0.294)"
+        >
+          <i class="fas fa-location fs-3"></i> Adex near me
+        </button>
+      </div>
+      <div class="offcanvas-footer d-flex gap-4 text-danger" style="padding: 2px 23px;">
+        <i class="fas fa-power-off fs-3"></i>
+        Sign Out
+      </div>
+    </div>
+
+
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content position-fixed bottom-0 start-0">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Select an Account
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div
+              id="toAirtimetoTransferModal"
+              data-bs-dismiss="modal"
+              class="text-uppercase"
+              onclick="pasteValueTransToModal()"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div id="confirmModalContainer" class="my-modal">
+      <div id="confirmModal">
+        <div class="confirm-modal-content">
+        <div class="confirm-modal-header">
+          <h5 class="my-auto">Confirm Transaction</h5>
+            <button class="btn btn-lg px-4 d-flex">
+              <i class="fas fa-times text-secondary fs-1 my-auto" onclick="closeMyModal()"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+          <div id="confirmTxt" class="mx-4 py-3 my-auto d-flex" style="font-size: 12px; border-bottom: 1px solid lightgray;"></div>
+          <h5 class="text-uppercase text-center" style="margin-top: 8px;">enter pin to confirm</h5>
+          <div class="w-50 d-flex justify-content-center gap-2 mx-auto mt-4">
+            <input type="number" class="w-75 text-center py-2 fs-4 mx-auto border" id="inpTry" pattern="[0-9]*" inputmode ="numeric" maxlength="4" onkeypress="if(this.value.length==4) return false;" />
+            <!-- <input type="number" name="code[]" maxlength="1" id="inp1" class="w-25 py-2 fs-4 text-center input-digit" value=""/>
+            <input type="number" name="code[]" maxlength="1" id="inp2" class="w-25 py-2 fs-4 text-center input-digit" value=""/>
+            <input type="number" name="code[]" maxlength="1" id="inp3" class="w-25 py-2 fs-4 text-center input-digit" value=""/>
+            <input type="number" name="code[]" maxlength="1" id="inp4" class="w-25 py-2 fs-4 text-center input-digit" value=""/> -->
+          </div>
+          <div class="d-flex flex-wrap gap-3  mt-4 w-100">
+            <button class="btn btn-lg fw-bold fs-2" style="width: 30%;" onclick="pasteValueTrans(1)">1</button>
+            <button class="btn btn-lg fw-bold fs-2" style="width: 30%;" onclick="pasteValueTrans(2)">2</button>
+            <button class="btn btn-lg fw-bold fs-2" style="width: 30%;" onclick="pasteValueTrans(3)">3</button>
+            <button class="btn btn-lg fw-bold fs-2" style="width: 30%;" onclick="pasteValueTrans(4)">4</button>
+            <button class="btn btn-lg fw-bold fs-2" style="width: 30%;" onclick="pasteValueTrans(5)">5</button>
+            <button class="btn btn-lg fw-bold fs-2" style="width: 30%;" onclick="pasteValueTrans(6)">6</button>
+            <button class="btn btn-lg fw-bold fs-2" style="width: 30%;" onclick="pasteValueTrans(7)">7</button>
+            <button class="btn btn-lg fw-bold fs-2" style="width: 30%;" onclick="pasteValueTrans(8)">8</button>
+            <button class="btn btn-lg fw-bold fs-2" style="width: 30%;" onclick="pasteValueTrans(9)">9</button>
+            <button class="btn btn-lg fw-bold fs-2 border border-0" style="width: 30%;" onclick="pasteValueTrans()" disabled></button>
+            <button class="btn btn-lg fw-bold fs-2" style="width: 30%;" onclick="pasteValueTrans(0)">0</button>
+            <button class="btn btn-lg fw-bold fs-2" style="width: 30%;" onclick="clearValue()"><i class="fas fa-delete-left"></i></button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div id="successModalContainer" class="my-modal">
+      <div id="successModal">
+        <div class="success-modal-content">
+          <div class="success-modal-header">
+            <h5 class="my-auto">Success</h5>
+              <button class="btn btn-lg px-4 d-flex">
+                <i class="fas fa-times text-secondary fs-1 my-auto" onclick="closeMyModal()"></i>
+              </button>
+          </div>
+          <div class="success-modal-body w-100 px-5 py-4 d-grid">
+            <div id="successConfirm" class="text-center mb-5" style="font-size: 12px"></div>
+            <div class="w-100 d-flex justify-content-center">
+              <div class="d-flex justify-content-center" style="width: 80px; height: 80px; border-radius: 50%; border: 5px solid green;"><i class="fas fa-check my-auto" style="font-size: 30px; color: rgb(49, 181, 49);"></i></div>
+            </div>
+            <button onclick="window.location.href = `adexAppTransferReceiptPage.html`" class="btn btn-lg border border-1 w-100 d-flex justify-content-center text-uppercase text-white" style="margin-top: 60px; background-color: rgb(235, 0, 0);">generate receipt</button>
+            <button class="btn btn-lg border border-1 w-100 d-flex justify-content-center mt-3" onclick="closeMyModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="adexApp.js"></script>
+    <script src="bootstrap.js"></script>
+  </body>
+</html>
