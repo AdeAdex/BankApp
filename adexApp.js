@@ -546,6 +546,7 @@ currentUserIndex = localStorage.getItem("currentUserIndex");
 // Function that display user name, account number, balance etc on the dashboard page and also load history to the dashboard page
 
 genDashboard = () => {
+  let whereComing = false
   for (let index = 0; index < allCustomer.length; index++) {
     offcanvasName.innerHTML = ` ${allCustomer[currentUserIndex].firstName} ${allCustomer[currentUserIndex].middleName.substring(0,1)}. ${allCustomer[currentUserIndex].lastName}`
     dashboardName.innerHTML = `${allCustomer[currentUserIndex].firstName} ${allCustomer[currentUserIndex].middleName} ${allCustomer[currentUserIndex].lastName} `
@@ -557,6 +558,9 @@ genDashboard = () => {
     ledgerBalance.innerHTML = `
     ${totalBalance.innerHTML}
     `;
+
+    toAccountModal.innerHTML = `${allCustomer[currentUserIndex].firstName} ${allCustomer[currentUserIndex].lastName} - ${allCustomer[currentUserIndex].accNo} <br>₦ ${allCustomer[currentUserIndex].balance}
+    `
     //deposit()
   }
   localStorage.setItem("customerPersonalDetails", JSON.stringify(allCustomer));
@@ -569,25 +573,45 @@ genDashboard = () => {
   allCustomer[currentUserIndex].history.reverse()
   currentCustomerHistory = allCustomer[currentUserIndex].history;
   for (let index = 0; index < currentCustomerHistory.length; index++) {
-    historyContainer.innerHTML += `
-    <div class="d-grid w-100 px-3 py-3 container shadow rounded rounded-2" style="border-left: 4px solid red; font-size: 12px" id="failedTrans">
-    <div class="d-flex justify-content-between">
-    <div>${currentCustomerHistory[index].airtimeDay}</div>
-    <div class="d-flex gap-1">
-    <div>- ₦</div>
-    <div>${currentCustomerHistory[index].totalAirtime}</div>
-    </div>
-    </div>
-    <hr>
-    <div class="d-flex justify-content-between">
-    <div class="d-flex gap-2">
-    <div> ${currentCustomerHistory[index].transactionID}${[index + 1]}</div>
-    <div>${currentCustomerHistory[index].airtimeNetworkType} </div>
-    </div>
-      <div>${currentCustomerHistory[index].airtimeToNumber}</div>
-    </div>
-    </div>
-    `
+    if (currentCustomerHistory[index].airtimeDay == undefined || currentCustomerHistory[index].totalAirtime == undefined || currentCustomerHistory[index].airtimeNetworkType == undefined || currentCustomerHistory[index].airtimeToNumber == undefined) {
+      historyContainer.innerHTML += `
+      <div class="d-grid w-100 px-3 py-3 container shadow rounded rounded-2" style="border-left: 4px solid green !important; font-size: 12px" id="failedTrans">
+      <div class="d-flex justify-content-between">
+      <div>${currentCustomerHistory[index].depositDay}</div>
+      <div class="d-flex gap-1">
+      <div> ₦</div>
+      <div>${currentCustomerHistory[index].totalDeposit}</div>
+      </div>
+      </div>
+      <hr>
+      <div class="d-flex justify-content-between">
+      <div class="d-flex gap-2">
+      <div> ${currentCustomerHistory[index].transactionID}${[index + 1]}</div>
+      <div>${currentCustomerHistory[index].depositAccount} </div>
+      </div>
+      `
+    } else {
+      historyContainer.innerHTML += `
+      <div class="d-grid w-100 px-3 py-3 container shadow rounded rounded-2" style="border-left: 4px solid red; font-size: 12px" id="failedTrans">
+      <div class="d-flex justify-content-between">
+      <div>${currentCustomerHistory[index].airtimeDay}</div>
+      <div class="d-flex gap-1">
+      <div>- ₦</div>
+      <div>${currentCustomerHistory[index].totalAirtime}</div>
+      </div>
+      </div>
+      <hr>
+      <div class="d-flex justify-content-between">
+      <div class="d-flex gap-2">
+      <div> ${currentCustomerHistory[index].transactionID}${[index + 1]}</div>
+      <div>${currentCustomerHistory[index].airtimeNetworkType} </div>
+      </div>
+        <div>${currentCustomerHistory[index].airtimeToNumber}</div>
+      </div>
+      </div>
+      `
+    }
+   
   }
   }
 };
@@ -637,21 +661,84 @@ loadTransferHistoryHistory = () => {
   }
 }
 
+pasteDepositValue = (param) => {
+  depositInput.value += param
+}
 
 
+pasteDepositPin = (param) => {
+  inpTry.value += param
+  confirmTxt.innerHTML = ""
+    if (inpTry.value == allCustomer[currentUserIndex].transactionPIN) {
+      allCustomer[currentUserIndex].balance = Number(allCustomer[currentUserIndex].balance) + Number(depositInput.value);
+
+      const dayss = new Date();
+      let depositHistory = {
+        depositAccount: allCustomer[currentUserIndex].accNo,
+        totalDeposit: depositInput.value,
+        depositDay:  dayss.toDateString() + " " + dayss.toLocaleTimeString(),
+        transactionID: `DS${Math.floor(Math.random() * 1000000)}/CD/SELF`,
+        history: [],
+      }
+
+      const depositReceipt = {
+        transactionDay: dayss.toDateString(),
+        transactionType: `Self`,
+        transactionDate: dayss.toDateString() + " " + dayss.toLocaleTimeString(),
+        // transactionDebitAccount: allCustomer[currentUserIndex].accNo,
+        transactionCreditAccount: allCustomer[currentUserIndex].accNo,
+        // transactionBeneficiary: accountNameTo.innerHTML,
+        // transactionBank: banks.value,
+        // transactionNarration: descriptn.value,
+        transactionStatus: `Success`,
+        transactionAmount: depositInput.value,
+        receipt: [],
+      }
+
+
+
+      allCustomer[currentUserIndex].history.push(depositHistory);
+      allCustomer[currentUserIndex].receipt.push(depositReceipt);
+      localStorage.setItem("customerPersonalDetails", JSON.stringify(allCustomer))
+      successModalContainer.style.display = "block";
+      // window.location.reload()
+      confirmModalContainer.style.display = "none"
+      successConfirm.innerHTML = `Your deposit of ${depositInput.value} into your account ${allCustomer[currentUserIndex].firstName} ${allCustomer[currentUserIndex].lastName} ${allCustomer[currentUserIndex].accNo} was successful`
+
+    } else if (inpTry.value.length == 4 && inpTry.value != allCustomer[currentUserIndex].transactionPIN) {
+      confirmTxt.innerHTML = `Operation failed Try again. Make sure you are entering the right Pin`
+      inpTry.value = ""
+    }
+}
+    
+
+openDepositModal = () => {
+  depositModalContainer.style.display = "block"
+}
+
+closeDepositMyModal = () => {
+  depositModalContainer.style.display = "none"
+  confirmModalContainer.style.display = "none"
+}
 
 // Function to deposit money
 
-// deposit = () => {
-//   allCustomer[currentUserIndex].balance = Number(allCustomer[currentUserIndex].balance) + Number(mum.value)
-//   localStorage.setItem(
-//     "customerPersonalDetails",
-//     JSON.stringify(allCustomer));
-//     totalBalance.innerHTML = allCustomer[currentUserIndex].balance;
-//     ledgerBalance.innerHTML = `
-//     ${totalBalance.innerHTML}
-//     `;
-// }
+ deposit = () => {
+
+   if (depositInput.value > 1000000 || Number(allCustomer[currentUserIndex].balance) + Number(depositInput.value) > 1000000) {
+    confirmAmount.innerHTML =  "Maximum deposit amount reached. This type of account can't hold more than one million naira (₦1,000,000)"
+   } else {
+    confirmModalContainer.style.display = "block"
+    depositModalContainer.style.display = "none"
+  //    allCustomer[currentUserIndex].balance = Number(allCustomer[currentUserIndex].balance) + Number(depositInput.value)
+
+  //  localStorage.setItem("customerPersonalDetails",
+  //    JSON.stringify(allCustomer));
+  //    totalBalance.innerHTML = allCustomer[currentUserIndex].balance;
+  //    ledgerBalance.innerHTML = `
+  //    ${totalBalance.innerHTML} `;
+   }
+ }
 
 
 // Function that display name on the offcanvas in all pages and also display name, account number and balance on the small modal when click on select an account
@@ -928,45 +1015,73 @@ genReceipt = () => {
   receiptContainer.innerHTML = "";
   currentReceipt.map((eachUser, index) => {
     // for (let index = 0; index < currentReceipt.length; index++) {
-      receiptContainer.innerHTML = `
-      <div class="text-center p-1 text-white mt-3" style="background-color: rgb(235, 0, 0)">
-      ${currentReceipt[index].transactionDay}
-      </div>
-      <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transType">
-            <span class="fw-bold">transaction type:</span> ${currentReceipt[index].transactionType}
-          </div>
-          <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transDate">
-          <span class="fw-bold">transaction date:</span> ${currentReceipt[index].transactionDate}
-          </div>
-          <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transDebitAcc">
-          <span class="fw-bold">debit account:</span> ${currentReceipt[index].transactionDebitAccount}
-          </div>
-          <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transCreditAcc">
-          <span class="fw-bold">credit account:</span> ${currentReceipt[index].transactionCreditAccount}
-          </div>
-          <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transBeneficiary">
-          <span class="fw-bold">beneficiary:</span> ${currentReceipt[index].transactionBeneficiary}
-          </div>
-          <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transBank">
-          <span class="fw-bold">bank:</span> ${currentReceipt[index].transactionBank}
-          </div>
-          <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transNarration">
-          <span class="fw-bold">narration:</span> ${currentReceipt[index].transactionNarration}
-          </div>
-          <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transStatus">
-          <span class="fw-bold">status:</span> ${currentReceipt[index].transactionStatus}
-          </div>
-          <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transAmount">
-          <span class="fw-bold">amount:</span> ₦${currentReceipt[index].transactionAmount}
-          </div>
-          <div class="mt-3 px-3" style="font-size: 8px">
-            Disclaimer: Your transaction has been successfully processed.
-            Note, however, that completion of any transfer may be affected by other factors including but not limited to transmission errors.
-            all transaction are subject to Adex confirmation and fraud proof verification
-          </div>
-      
-      `
-    
+      if (currentReceipt[index].transactionDebitAccount == undefined || currentReceipt[index].transactionBeneficiary == undefined || currentReceipt[index].transactionBank == undefined || currentReceipt[index].transactionNarration == undefined) {
+        receiptContainer.innerHTML = `
+        <div class="text-center p-1 text-white mt-3" style="background-color: rgb(235, 0, 0)">
+        ${currentReceipt[index].transactionDay}
+        </div>
+        <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transType">
+              <span class="fw-bold">transaction type:</span> ${currentReceipt[index].transactionType}
+            </div>
+            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transDate">
+            <span class="fw-bold">transaction date:</span> ${currentReceipt[index].transactionDate}
+            </div>
+            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transCreditAcc">
+            <span class="fw-bold">credit account:</span> ${currentReceipt[index].transactionCreditAccount}
+            </div>
+            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transStatus">
+            <span class="fw-bold">status:</span> ${currentReceipt[index].transactionStatus}
+            </div>
+            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transAmount">
+            <span class="fw-bold">amount:</span> ₦${currentReceipt[index].transactionAmount}
+            </div>
+            <div class="mt-3 px-3" style="font-size: 8px">
+              Disclaimer: Your transaction has been successfully processed.
+              Note, however, that completion of any transfer may be affected by other factors including but not limited to transmission errors.
+              all transaction are subject to Adex confirmation and fraud proof verification
+            </div>
+        
+        `
+      } else {
+        receiptContainer.innerHTML = `
+        <div class="text-center p-1 text-white mt-3" style="background-color: rgb(235, 0, 0)">
+        ${currentReceipt[index].transactionDay}
+        </div>
+        <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transType">
+              <span class="fw-bold">transaction type:</span> ${currentReceipt[index].transactionType}
+            </div>
+            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transDate">
+            <span class="fw-bold">transaction date:</span> ${currentReceipt[index].transactionDate}
+            </div>
+            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transDebitAcc">
+            <span class="fw-bold">debit account:</span> ${currentReceipt[index].transactionDebitAccount}
+            </div>
+            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transCreditAcc">
+            <span class="fw-bold">credit account:</span> ${currentReceipt[index].transactionCreditAccount}
+            </div>
+            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transBeneficiary">
+            <span class="fw-bold">beneficiary:</span> ${currentReceipt[index].transactionBeneficiary}
+            </div>
+            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transBank">
+            <span class="fw-bold">bank:</span> ${currentReceipt[index].transactionBank}
+            </div>
+            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transNarration">
+            <span class="fw-bold">narration:</span> ${currentReceipt[index].transactionNarration}
+            </div>
+            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transStatus">
+            <span class="fw-bold">status:</span> ${currentReceipt[index].transactionStatus}
+            </div>
+            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transAmount">
+            <span class="fw-bold">amount:</span> ₦${currentReceipt[index].transactionAmount}
+            </div>
+            <div class="mt-3 px-3" style="font-size: 8px">
+              Disclaimer: Your transaction has been successfully processed.
+              Note, however, that completion of any transfer may be affected by other factors including but not limited to transmission errors.
+              all transaction are subject to Adex confirmation and fraud proof verification
+            </div>
+        
+        `
+      }    
    })
 }
 
@@ -979,6 +1094,9 @@ clearValue = () => {
   inpTry.value = inpTry.value.substring(0, inpTry.value.length - 1);
 }
 
+clearDepositValue = () => {
+  depositInput.value = depositInput.value.substring(0, depositInput.value.length - 1);
+}
 
 // function that paste the name, account number and balance on airtime page modal
 
@@ -1290,7 +1408,9 @@ async function getContacts() {
 closeMyModal = () => {
   successModalContainer.style.display = "none"
   confirmModalContainer.style.display = "none"
+      window.location.reload()
 }
+
 
 
 // Function that closes the modal i created when user click anywhere on the window
