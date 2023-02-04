@@ -493,6 +493,7 @@ let toOpenAcc2 = () => {
       stateOfResidence: stateResidence.value,
       address: rAddress.value,
       balance: 1000,
+      charges: 26,
       password: '',
       transactionPIN: '',
       history: [],
@@ -573,7 +574,7 @@ genDashboard = () => {
   allCustomer[currentUserIndex].history.reverse()
   currentCustomerHistory = allCustomer[currentUserIndex].history;
   for (let index = 0; index < currentCustomerHistory.length; index++) {
-    if (currentCustomerHistory[index].airtimeDay == undefined || currentCustomerHistory[index].totalAirtime == undefined || currentCustomerHistory[index].airtimeNetworkType == undefined || currentCustomerHistory[index].airtimeToNumber == undefined) {
+    if (currentCustomerHistory[index].airtimeDay == undefined && currentCustomerHistory[index].totalAirtime == undefined && currentCustomerHistory[index].airtimeNetworkType == undefined && currentCustomerHistory[index].airtimeToNumber == undefined) {
       historyContainer.innerHTML += `
       <div class="d-grid w-100 px-3 py-3 container shadow rounded rounded-2" style="border-left: 4px solid green !important; font-size: 12px" id="failedTrans">
       <div class="d-flex justify-content-between">
@@ -588,6 +589,26 @@ genDashboard = () => {
       <div class="d-flex gap-2">
       <div> ${currentCustomerHistory[index].transactionID}${[index + 1]}</div>
       <div>${currentCustomerHistory[index].depositAccount} </div>
+      </div>
+      `
+    } else if (currentCustomerHistory[index].totalAirtime == undefined && currentCustomerHistory[index].airtimeToNumber == undefined){
+      historyContainer.innerHTML += `
+      <div class="d-grid w-100 px-3 py-3 container shadow rounded rounded-2" style="border-left: 4px solid red; font-size: 12px" id="failedTrans">
+      <div class="d-flex justify-content-between">
+      <div>${currentCustomerHistory[index].airtimeDay}</div>
+      <div class="d-flex gap-1">
+      <div>- ₦</div>
+      <div>${currentCustomerHistory[index].chargesAmount}</div>
+      </div>
+      </div>
+      <hr>
+      <div class="d-flex justify-content-between">
+      <div class="d-flex gap-2">
+      <div> ${currentCustomerHistory[index].transactionID}${[index + 1]}</div>
+      <div> </div>
+      </div>
+        <div>${currentCustomerHistory[index].airtimeNetworkType}</div>
+      </div>
       </div>
       `
     } else {
@@ -838,8 +859,9 @@ checkFor = () => {
 
 pasteValue = (param) => {
   // document.querySelectorAll('.input-digit').forEach(el => el.onkeyup = e => e.target.value && el.nextElementSibling.focus())
-  inpTry.value += param
-  confirmTxt.innerHTML = ""
+  // currentChargeHistory = allCustomer[currentUserIndex].history.chargesAmount
+  inpTry.value += param;
+  confirmTxt.innerHTML = "";
     if (inpTry.value == allCustomer[currentUserIndex].transactionPIN) {
       allCustomer[currentUserIndex].balance = Number(allCustomer[currentUserIndex].balance) - Number(airtimeAmount.value);
 
@@ -852,6 +874,7 @@ pasteValue = (param) => {
         transactionID: `AT${Math.floor(Math.random() * 10000)}/`,
         history: [],
       }
+  
       allCustomer[currentUserIndex].history.push(airtimeHistory);
       localStorage.setItem("customerPersonalDetails", JSON.stringify(allCustomer))
       successModalContainer.style.display = "block";
@@ -910,7 +933,7 @@ pasteValueTrans = (param) => {
   inpTry.value += param
   confirmTxt.innerHTML = ""
     if (inpTry.value == allCustomer[currentUserIndex].transactionPIN) {
-      allCustomer[currentUserIndex].balance = Number(allCustomer[currentUserIndex].balance) - Number(transAmountTo.value);
+      allCustomer[currentUserIndex].balance = Number(allCustomer[currentUserIndex].balance) - Number(transAmountTo.value) - Number(allCustomer[currentUserIndex].charges);;
 
       const dayss = new Date();
       let myTransferHistory = {
@@ -920,6 +943,16 @@ pasteValueTrans = (param) => {
         descriptions: descriptn.value,
         airtimeDay:  dayss.toDateString() + " " + dayss.toLocaleTimeString(),
         transactionID: `NIP TRA/ ${Math.floor(Math.random() * 10000)}/`,
+        history: [],
+      }
+
+      let chargeHistory = {
+        airtimeNetworkType: `Card maintenance fee`,
+        // airtimeToNumber: airtimeTo.value,
+        // totalAirtime: airtimeAmount.value,
+        chargesAmount:  allCustomer[currentUserIndex].charges,
+        airtimeDay:  dayss.toDateString() + " " + dayss.toLocaleTimeString(),
+        transactionID: `AT${Math.floor(Math.random() * 10000)}/`,
         history: [],
       }
 
@@ -940,6 +973,7 @@ pasteValueTrans = (param) => {
 
       allCustomer[currentUserIndex].history.push(myTransferHistory);
       allCustomer[currentUserIndex].transferHistory.push(myTransferHistory);
+      allCustomer[currentUserIndex].history.push(chargeHistory);
       allCustomer[currentUserIndex].receipt.push(transferReceipt);
       localStorage.setItem("customerPersonalDetails", JSON.stringify(allCustomer))
 
