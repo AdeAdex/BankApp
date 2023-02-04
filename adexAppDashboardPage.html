@@ -70,9 +70,9 @@
         <div>eaZyLinks</div>
         <hr />
         <div class="w-100 py-0 d-flex justify-content-between">
-          <div class="d-flex flex-column" style="width: 23%; height: 80px;">
+          <div class="d-flex flex-column" style="width: 23%; height: 80px;" data-bs-toggle="modal" data-bs-target="#accountModal">
             <img src="pic/qr-removebg-preview.png" alt="" style="width: 100%; height: 100%;">
-            <span style="font-size: 9px; text-align: center;">QR Payments</span>
+            <span style="font-size: 9px; text-align: center;">Deposit</span>
           </div>
           <div class="d-flex flex-column" style="width: 23%; height: 80px;" onclick="toTravelPage()">
             <img src="pic/leisure2-removebg-preview.png" alt="" style="width: 100%; height: 100%;" >
@@ -298,6 +298,359 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Delete Alll</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ <div
+      class="modal fade"
+      id="accountModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content position-fixed bottom-0 start-0">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Select an Account
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div
+              id="toAccountModal"
+              data-bs-dismiss="modal"
+              class="text-uppercase" onclick="openDepositModal()">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- <div class="modal fade" id="depositModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog position-fixed start-0 end-0 bottom-0 w-100" style="left: 0%"> -->
+    <div id="depositModalContainer" class="my-modal">
+      <div id="depositModal" class="bg-white">
+    <div class="modal-content pt-2 px-5 pb-5">
+      <div class="modal-header d-flex">
+        <h5 class="my-auto">Deposit</h5>
+        <button class="btn btn-lg d-flex">
+          <i
+            class="fas fa-times text-secondary fs-1 my-auto"
+            onclick="closeDepositMyModal()"
+          ></i>
+        </button>
+      </div>
+      <div class="modal-body ">
+        <div
+              id="confirmAmount"
+              class="mx-4 py-3 my-auto d-flex"
+              style="font-size: 12px; border-bottom: 1px solid lightgray"
+            ></div>
+            <h5 class="text-uppercase text-center" style="margin-top: 8px">
+              enter amount to deposit
+            </h5>
+        <input type="number" class="w-50 text-center d-flex py-2 fs-4 mx-auto border" value="" id="depositInput" style="background-color: inherit" disabled>
+        <div class="d-flex flex-wrap gap-3 mt-4 w-100">
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositValue(1)"
+          >
+            1
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositValue(2)"
+          >
+            2
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositValue(3)"
+          >
+            3
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositValue(4)"
+          >
+            4
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositValue(5)"
+          >
+            5
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositValue(6)"
+          >
+            6
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositValue(7)"
+          >
+            7
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositValue(8)"
+          >
+            8
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositValue(9)"
+          >
+            9
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2 border border-0"
+            style="width: 30%"
+            onclick="pasteDepositValue()"
+            disabled
+          ></button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositValue(0)"
+          >
+            0
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="clearDepositValue()"
+          >
+            <i class="fas fa-delete-left"></i>
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer mt-3">
+        <button type="button" class="btn btn-success w-100" onclick="deposit()">Deposit </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="confirmModalContainer" class="my-modal">
+  <div id="confirmModal">
+    <div class="confirm-modal-content px-4">
+      <div class="confirm-modal-header">
+        <h5 class="my-auto">Confirm Transaction</h5>
+        <button class="btn btn-lg d-flex">
+          <i
+            class="fas fa-times text-secondary fs-1 my-auto"
+            onclick="closeMyModal()"
+          ></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div
+          id="confirmTxt"
+          class="mx-4 py-3 my-auto d-flex"
+          style="font-size: 12px; border-bottom: 1px solid lightgray"
+        ></div>
+        <h5 class="text-uppercase text-center" style="margin-top: 8px">
+          enter pin to confirm
+        </h5>
+        <!-- <input
+          type="number"
+          class="w-25"
+          id="inpTry"
+          pattern="[0-9]*"
+          inputmode="numeric"
+          maxlength="4"
+          onkeypress="if(this.value.length==4) return false;"
+        /> -->
+        <div class="w-50 d-flex justify-content-center gap-2 mx-auto mt-4">
+        <input type="number" class="w-75 text-center py-2 fs-4 mx-auto border" id="inpTry" pattern="[0-9]*" inputmode ="numeric" maxlength="4" onkeypress="if(this.value.length==4) return false;" style="background-color: inherit" disabled=""/>
+
+          <!-- <input
+            type="number"
+            name="code[]"
+            maxlength="1"
+            id="inp1"
+            class="w-25 py-2 fs-4 text-center input-digit"
+            value=""
+          />
+          <input
+            type="number"
+            name="code[]"
+            maxlength="1"
+            id="inp2"
+            class="w-25 py-2 fs-4 text-center input-digit"
+            value=""
+          />
+          <input
+            type="number"
+            name="code[]"
+            maxlength="1"
+            id="inp3"
+            class="w-25 py-2 fs-4 text-center input-digit"
+            value=""
+          />
+          <input
+            type="number"
+            name="code[]"
+            maxlength="1"
+            id="inp4"
+            class="w-25 py-2 fs-4 text-center input-digit"
+            value=""
+          /> -->
+        </div>
+        <div class="d-flex flex-wrap gap-3 mt-4 w-100">
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositPin(1)"
+          >
+            1
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositPin(2)"
+          >
+            2
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositPin(3)"
+          >
+            3
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositPin(4)"
+          >
+            4
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositPin(5)"
+          >
+            5
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositPin(6)"
+          >
+            6
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositPin(7)"
+          >
+            7
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositPin(8)"
+          >
+            8
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteDepositPin(9)"
+          >
+            9
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2 border border-0"
+            style="width: 30%"
+            onclick="pasteValue()"
+            disabled
+          ></button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="pasteValue(0)"
+          >
+            0
+          </button>
+          <button
+            class="btn btn-lg fw-bold fs-2"
+            style="width: 30%"
+            onclick="clearValue()"
+          >
+            <i class="fas fa-delete-left"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="successModalContainer" class="my-modal">
+  <div id="successModal" style="top: 0% !important;">
+    <div class="success-modal-content">
+      <div class="success-modal-header">
+        <h5 class="my-auto">Success</h5>
+        <button class="btn btn-lg px-4 d-flex">
+          <i
+            class="fas fa-times text-secondary fs-1 my-auto"
+            onclick="closeMyModal()"
+          ></i>
+        </button>
+      </div>
+      <div class="success-modal-body w-100 px-5 py-4 d-grid">
+        <div
+          id="successConfirm"
+          class="text-center mb-5"
+          style="font-size: 12px"
+        ></div>
+        <div class="w-100 d-flex justify-content-center">
+          <div
+            class="d-flex justify-content-center"
+            style="
+              width: 80px;
+              height: 80px;
+              border-radius: 50%;
+              border: 5px solid green;
+            "
+          >
+            <i
+              class="fas fa-check my-auto"
+              style="font-size: 30px; color: rgb(49, 181, 49)"
+            ></i>
+          </div>
+        </div>
+        <button onclick="window.location.href = `adexAppTransferReceiptPage.html`" class="btn btn-lg border border-1 w-100 d-flex justify-content-center text-uppercase text-white" style="margin-top: 60px; background-color: rgb(235, 0, 0);">generate receipt</button>
+        <button
+          class="btn btn-lg border border-1 w-100 d-flex justify-content-center"
+          style="margin-top: 60px"
+          onclick="closeMyModal()"
+        >
+          Close
+        </button>
       </div>
     </div>
   </div>
