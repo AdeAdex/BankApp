@@ -521,7 +521,7 @@ let toOpenAcc2 = () => {
 let atmView = () => {
   for (let index = 0; index < allCustomer.length; index++) {
     atmName.innerHTML = `
-    ${allCustomer[index].firstName} ${allCustomer[index].middleName} ${allCustomer[index].lastName}
+    ${allCustomer[index].firstName} ${allCustomer[index].middleName.substring(0,1)} ${allCustomer[index].lastName}
     `;
     atmCardNo.innerHTML = `
     ${allCustomer[index].atmCardNumber}
