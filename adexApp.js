@@ -947,12 +947,12 @@ pasteValueTrans = (param) => {
       }
 
       let chargeHistory = {
-        airtimeNetworkType: `Card maintenance fee`,
+        airtimeNetworkType: `Transfer fee`,
         // airtimeToNumber: airtimeTo.value,
         // totalAirtime: airtimeAmount.value,
         chargesAmount:  allCustomer[currentUserIndex].charges,
         airtimeDay:  dayss.toDateString() + " " + dayss.toLocaleTimeString(),
-        transactionID: `AT${Math.floor(Math.random() * 10000)}/`,
+        transactionID: `TF${Math.floor(Math.random() * 10000)}/Other/DB`,
         history: [],
       }
 
