@@ -224,7 +224,7 @@ body {
 
 
 
-#confirmModalContainer {
+#confirmModalContainer, #depositModalContainer {
   z-index: 3;
   background-color: rgba(3, 3, 31, 0.4);
   position: absolute;
@@ -235,8 +235,7 @@ body {
   display: none;
 }
 
-
-#confirmModal {
+#confirmModal, #depositModal {
   position: fixed;
   z-index: 4;
   left: 0;
