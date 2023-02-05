@@ -946,15 +946,15 @@ pasteValueTrans = (param) => {
         history: [],
       }
 
-//       let chargeHistory = {
-//         airtimeNetworkType: `Card maintenance fee`,
-//         // airtimeToNumber: airtimeTo.value,
-//         // totalAirtime: airtimeAmount.value,
-//         chargesAmount:  allCustomer[currentUserIndex].charges,
-//         airtimeDay:  dayss.toDateString() + " " + dayss.toLocaleTimeString(),
-//         transactionID: `AT${Math.floor(Math.random() * 10000)}/`,
-//         history: [],
-//       }
+      let chargeHistory = {
+        airtimeNetworkType: `Transfer fee`,
+        // airtimeToNumber: airtimeTo.value,
+        // totalAirtime: airtimeAmount.value,
+        chargesAmount:  allCustomer[currentUserIndex].charges,
+        airtimeDay:  dayss.toDateString() + " " + dayss.toLocaleTimeString(),
+        transactionID: `AT${Math.floor(Math.random() * 10000)}/`,
+        history: [],
+      }
 
 
       const transferReceipt = {
