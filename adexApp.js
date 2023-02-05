@@ -240,23 +240,23 @@ goBackToHelp = () => {
 
 // Function that check if the user is online or offline
 
-let checkNetwork = () => {
-  if (navigator.onLine) {
-    networkDiv.style.display = "none"
-    body.style.pointerEvents = "auto"
-  } else {
-    body.style.pointerEvents = "none"
-    networkDiv.style.display = "block"
-    networkDiv.innerHTML = `
-  Network not available
-      <div class="w-100 pt-2 d-flex justify-content-center">
-        <div>Reconnecting</div>
-        <div class="spinner-border text-light mx-2" role="status"></div>
-      </div>
-  `
-  }
+// let checkNetwork = () => {
+//   if (navigator.onLine) {
+//     networkDiv.style.display = "none"
+//     body.style.pointerEvents = "auto"
+//   } else {
+//     body.style.pointerEvents = "none"
+//     networkDiv.style.display = "block"
+//     networkDiv.innerHTML = `
+//   Network not available
+//       <div class="w-100 pt-2 d-flex justify-content-center">
+//         <div>Reconnecting</div>
+//         <div class="spinner-border text-light mx-2" role="status"></div>
+//       </div>
+//   `
+//   }
 
-}
+// }
 
 // Some other Function that reload the page
 let goBack = () => {
@@ -947,12 +947,12 @@ pasteValueTrans = (param) => {
       }
 
       let chargeHistory = {
-        airtimeNetworkType: `Transfer fee`,
+        airtimeNetworkType: `Card maintenance fee`,
         // airtimeToNumber: airtimeTo.value,
         // totalAirtime: airtimeAmount.value,
         chargesAmount:  allCustomer[currentUserIndex].charges,
         airtimeDay:  dayss.toDateString() + " " + dayss.toLocaleTimeString(),
-        transactionID: `TF${Math.floor(Math.random() * 10000)}/Other/DB`,
+        transactionID: `AT${Math.floor(Math.random() * 10000)}/`,
         history: [],
       }
 
@@ -1048,35 +1048,6 @@ genReceipt = () => {
   currentReceipt = allCustomer[currentUserIndex].receipt;
   receiptContainer.innerHTML = "";
   currentReceipt.map((eachUser, index) => {
-    // for (let index = 0; index < currentReceipt.length; index++) {
-      if (currentReceipt[index].transactionDebitAccount == undefined || currentReceipt[index].transactionBeneficiary == undefined || currentReceipt[index].transactionBank == undefined || currentReceipt[index].transactionNarration == undefined) {
-        receiptContainer.innerHTML = `
-        <div class="text-center p-1 text-white mt-3" style="background-color: rgb(235, 0, 0)">
-        ${currentReceipt[index].transactionDay}
-        </div>
-        <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transType">
-              <span class="fw-bold">transaction type:</span> ${currentReceipt[index].transactionType}
-            </div>
-            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transDate">
-            <span class="fw-bold">transaction date:</span> ${currentReceipt[index].transactionDate}
-            </div>
-            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transCreditAcc">
-            <span class="fw-bold">credit account:</span> ${currentReceipt[index].transactionCreditAccount}
-            </div>
-            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transStatus">
-            <span class="fw-bold">status:</span> ${currentReceipt[index].transactionStatus}
-            </div>
-            <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transAmount">
-            <span class="fw-bold">amount:</span> ₦${currentReceipt[index].transactionAmount}
-            </div>
-            <div class="mt-3 px-3" style="font-size: 8px">
-              Disclaimer: Your transaction has been successfully processed.
-              Note, however, that completion of any transfer may be affected by other factors including but not limited to transmission errors.
-              all transaction are subject to Adex confirmation and fraud proof verification
-            </div>
-        
-        `
-      } else {
         receiptContainer.innerHTML = `
         <div class="text-center p-1 text-white mt-3" style="background-color: rgb(235, 0, 0)">
         ${currentReceipt[index].transactionDay}
@@ -1115,7 +1086,6 @@ genReceipt = () => {
             </div>
         
         `
-      }    
    })
 }
 
@@ -1469,3 +1439,33 @@ let devices = () => {
 };
 
 
+
+   
+      // if (currentReceipt[index].transactionDebitAccount == undefined || currentReceipt[index].transactionBeneficiary == undefined || currentReceipt[index].transactionBank == undefined || currentReceipt[index].transactionNarration == undefined) {
+      //   receiptContainer.innerHTML = `
+      //   <div class="text-center p-1 text-white mt-3" style="background-color: rgb(235, 0, 0)">
+      //   ${currentReceipt[index].transactionDay}
+      //   </div>
+      //   <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transType">
+      //         <span class="fw-bold">transaction type:</span> ${currentReceipt[index].transactionType}
+      //       </div>
+      //       <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transDate">
+      //       <span class="fw-bold">transaction date:</span> ${currentReceipt[index].transactionDate}
+      //       </div>
+      //       <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transCreditAcc">
+      //       <span class="fw-bold">credit account:</span> ${currentReceipt[index].transactionCreditAccount}
+      //       </div>
+      //       <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transStatus">
+      //       <span class="fw-bold">status:</span> ${currentReceipt[index].transactionStatus}
+      //       </div>
+      //       <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transAmount">
+      //       <span class="fw-bold">amount:</span> ₦${currentReceipt[index].transactionAmount}
+      //       </div>
+      //       <div class="mt-3 px-3" style="font-size: 8px">
+      //         Disclaimer: Your transaction has been successfully processed.
+      //         Note, however, that completion of any transfer may be affected by other factors including but not limited to transmission errors.
+      //         all transaction are subject to Adex confirmation and fraud proof verification
+      //       </div>
+        
+      //   `
+      // } 
