@@ -499,6 +499,8 @@ let toOpenAcc2 = () => {
       history: [],
       transferHistory: [],
       receipt: [],
+      depositReceipt: [],
+      billReceipt: [],
       registeredAcc: [],
       atmPIN: `${Math.floor(Math.random() * 10000)}`,
       accNo: `221${Math.floor(Math.random() * 10000000)}`,
@@ -702,7 +704,7 @@ pasteDepositPin = (param) => {
         history: [],
       }
 
-      const depositReceipt = {
+      const eachDepositReceipt = {
         transactionDay: dayss.toDateString(),
         transactionType: `Self`,
         transactionDate: dayss.toDateString() + " " + dayss.toLocaleTimeString(),
@@ -719,7 +721,7 @@ pasteDepositPin = (param) => {
 
 
       allCustomer[currentUserIndex].history.push(depositHistory);
-      allCustomer[currentUserIndex].receipt.push(depositReceipt);
+      allCustomer[currentUserIndex].depositReceipt.push(eachDepositReceipt);
       localStorage.setItem("customerPersonalDetails", JSON.stringify(allCustomer))
       successModalContainer.style.display = "block";
       // window.location.reload()
