@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="adexApp.css" />
     <link href="fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="bootstrap.css" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css" rel="stylesheet">
     <title>adex Bank TransferPage</title>
   </head>
   <body onload="genAirtime()">
+    <div class="main-main">
     <div class="w-100 login d-flex justify-content-between">
       <div class="d-flex text-white mt-auto mb-auto">
         <i
@@ -17,7 +19,7 @@
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasWithBothOptions"
           aria-controls="offcanvasWithBothOptions"
-        ></i>
+         style="cursor: pointer;"></i>
         <h4>Transfers</h4>
       </div>
       <img src="pic/ade.png" alt="" class="login-img" />
@@ -39,7 +41,6 @@
               <button
                 class="btn btn-light border border-danger d-grid py-2 px-3"
                 style="height: 80px; min-width: 30%"
-                
               >
                 <div class="d-flex">
                   <i class="fas fa-user fs-3 text-danger"></i>
@@ -53,7 +54,6 @@
               <button
                 class="btn btn-light border border-danger d-grid py-2 px-3"
                 style="height: 80px; min-width: 30%"
-                
               >
                 <div class="d-flex">
                   <i class="fas fa-house fs-3 text-danger"></i>
@@ -67,7 +67,6 @@
               <button
                 class="btn btn-light border border-danger d-grid py-2 px-3"
                 style="height: 80px; min-width: 30%"
-                
               >
                 <div class="d-flex">
                   <i class="fas fa-home fs-3 text-danger"></i>
@@ -81,7 +80,6 @@
               <button
                 class="btn btn-light border border-danger d-grid py-2 px-3"
                 style="height: 80px; min-width: 30%"
-                
               >
                 <div class="d-flex">
                   <i class="fas fa-home fs-3 text-danger"></i>
@@ -95,7 +93,6 @@
               <button
                 class="btn btn-light border border-danger d-grid py-2 px-3"
                 style="height: 80px; min-width: 30%"
-                
               >
                 <div class="d-flex">
                   <i class="fas fa-home fs-3 text-danger"></i>
@@ -109,7 +106,6 @@
               <button
                 class="btn btn-light border border-danger d-grid py-2 px-3"
                 style="height: 80px; min-width: 30%"
-                
               >
                 <div class="d-flex">
                   <i class="fas fa-home fs-3 text-danger"></i>
@@ -272,25 +268,25 @@
       class="footer-container position-fixed w-100 px-4 bottom-0 py-3 justify-content-between d-flex bg-light"
       style="z-index: 3"
     >
-      <div class="d-grid justify-content-center" onclick="showTrans(1)">
+      <div class="d-grid justify-content-center" onclick="showTrans(1)" style="cursor: pointer;">
         <i class="fas fa-list fs-2 text-center"></i>
         <label class="form-check-label" for="flexSwitchCheckChecked"
           >Overview</label
         >
       </div>
-      <div class="d-grid justify-content-center" onclick="showTrans(2)">
+      <div class="d-grid justify-content-center" onclick="showTrans(2)" style="cursor: pointer;">
         <i class="fas fa-mobile-alt fs-2 text-center"></i>
         <label class="form-check-label" for="flexSwitchCheckChecked"
           >Airtime</label
         >
       </div>
-      <div class="d-grid justify-content-center" onclick="showTrans(3)">
+      <div class="d-grid justify-content-center" onclick="showTrans(3)" style="cursor: pointer;">
         <i class="fas fa-exchange-alt fs-2 text-center"></i>
         <label class="form-check-label" for="flexSwitchCheckChecked"
           >Transfer</label
         >
       </div>
-      <div class="d-grid justify-content-center" onclick="showTrans(4)">
+      <div class="d-grid justify-content-center" onclick="showTrans(4)" style="cursor: pointer;">
         <i class="fas fa-credit-card-alt fs-2 text-center"></i>
         <label class="form-check-label" for="flexSwitchCheckChecked"
           >Bills</label
@@ -443,7 +439,7 @@
             <div
               id="toAirtimetoTransferModal"
               data-bs-dismiss="modal"
-              class="text-uppercase"
+              class="text-uppercase" style="cursor: pointer;"
               onclick="pasteValueTransToModal()"
             ></div>
           </div>
@@ -512,9 +508,10 @@
         </div>
       </div>
     </div>
-
+  </div>
 
     <script src="adexApp.js"></script>
     <script src="bootstrap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
   </body>
 </html>
