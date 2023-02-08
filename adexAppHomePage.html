@@ -10,13 +10,14 @@
     <title>Adex Bank App</title>
   </head>
   <body onload="checkNetwork()" id="body">
+    <div class="main-main h-100">
     <div
       class="position-absolute top-0 bg-black text-white py-4 w-100 text-center"
       style="z-index: 5"
       id="networkDiv"
     ></div>
     <img src="pic/ade.png" alt="" class="logo" />
-    <div class="notification-bell" onclick="toNotification()">
+    <div class="notification-bell" onclick="toNotification()" style="cursor: pointer;">
       <i class="fas fa-bell mt-auto mb-auto fs-1"></i>
     </div>
     <div
@@ -107,6 +108,7 @@
         <span onclick="toOpenAcc()" style="cursor: pointer">Open Account</span>
         <span onclick="toHelp()" style="cursor: pointer">Help</span>
       </div>
+    </div>
     </div>
     <script src="adexApp.js"></script>
     <script src="bootstrap.js"></script>
