@@ -354,6 +354,9 @@ let showCardPin = () => {
   }
 }
 
+text = () => {
+  alert(allCustomer[currentUserIndex].atmCardNumber.slice(-6))
+}
 
 
 // Function that check if the pin entered correspond to the saved one
@@ -366,7 +369,7 @@ continueReg2 = () => {
   // allCustomer.map((eachUser, index) => {
     for (let index = 0; index < tryGo.length; index++) {
       if (
-        tryGo[index].value == allCustomer[currentUserIndex].atmPIN/*  && PAN[index].value == allCustomer[currentUserIndex].atmCardNumber */
+        tryGo[index].value == allCustomer[currentUserIndex].atmPIN && PAN[index].value == allCustomer[currentUserIndex].atmCardNumber.slice(-6)
       ) {
         found = true;
         break;
@@ -378,7 +381,7 @@ continueReg2 = () => {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: "You've enterd incorrect Pin. Try again!",
+      text: "You've entered either incorrect Pin or incorrect last six digit of card. Try again!",
       footer: '<a href="">Why do I have this issue?</a>'
     })
   }  
@@ -420,25 +423,40 @@ closeMyRegSuccessModal = () => {
 
 confirmPass = () => {
   con.style.display = `block`
+  // con2.style.display = `block`
+  passGood = false
+  pinGood = false
   if (accPass.value == confirmAccPass.value) {
       con.innerHTML = `Password match`
       con.style.color = `green`
+      passGood = true
   } else {
     con.innerHTML = `Password does not match`
     con.style.color = `red`
-  }
-}
+  con2.style.display = `none`
 
-goo = () => {
-  con2.style.display = `block`
+  }
   if (transPIN.value == confirmTransPIN.value) {
+  con2.style.display = `none`
     con2.innerHTML = `Pin match`
     con2.style.color = `green`
+    pinGood = true
+  con2.style.display = `none`
+
 } else {
   con2.innerHTML = `Pin does not match`
   con2.style.color = `red`
+  con2.style.display = `block`
+
+}
+if (passGood && pinGood) {
+  continueBtn3.style.backgroundColor = "rgb(235, 0, 0)"
+} else {
+  continueBtn3.style.backgroundColor = "gray"
+
 }
 }
+
 
 // Function that generate otp and display Acc No on Registration page 3 and display success modal on registration page 3
 continueReg3 = () => {
@@ -569,7 +587,7 @@ let toOpenAcc2 = () => {
       stateOfOrigin: stateOrigin.value,
       stateOfResidence: stateResidence.value,
       address: rAddress.value,
-      balance: 0,
+      balance: 1000,
       charges: 10,
       password: '',
       transactionPIN: '',
@@ -1042,10 +1060,10 @@ confirmAirtimeTrans = (netType) => {
 }
 
 checkFor = () => {
-  if (/* airtimeMNumber.innerHTML == "" &&  */airtimeTo.value == "" && airtimeAmount.value == "") {
-    airtimeContinueBtn.style.backgroundColor = "red"
+  if (airtimeTo.value != "" && airtimeAmount.value != "") {
+    airtimeContinueBtn.style.backgroundColor = "rgb(235, 0, 0)"
   } else {
-    airtimeContinueBtn.style.backgroundColor = "blue"
+    airtimeContinueBtn.style.backgroundColor = "gray"
   }
 }
 
@@ -1467,6 +1485,12 @@ let switchType = () => {
 
 let userSelect = (regType) => {
   if (regType == "token") {
+    Swal.fire({
+      icon: 'error',
+      title: 'Something went wrong!',
+      text: 'This might seems not available at the moment, try another means',
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
     mySelect1.innerHTML = `<i class="fas fa-check-circle fs-4 text-danger"></i>`;
     mySelect2.innerHTML = ``;
     mySelect3.innerHTML = ``;
@@ -1474,7 +1498,7 @@ let userSelect = (regType) => {
     <div id="accNo" class="">Account: ${allCustomer[currentUserIndex].accNo}</div>
         <div class="mb-4 mt-3">
           <label for="validationCustom02" class="form-label fw-bold"
-            >CardPAN</label
+            >Token</label
           >
           <input
             type="number"
@@ -1486,6 +1510,7 @@ let userSelect = (regType) => {
             id="PAN"
             value=""
             required
+            disabled
             placeholder="Enter Token"
           />
         </div>
@@ -1501,6 +1526,7 @@ let userSelect = (regType) => {
             class="login-input form-control form-control-lg pin-for-user-select"
             placeholder="Enter Card PIN"
             id="toKenPIN"
+            disabled
             onkeyup="pinOk()"
           />
         </div>
