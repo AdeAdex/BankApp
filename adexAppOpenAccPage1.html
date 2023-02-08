@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="adexApp.css" />
     <link href="fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="bootstrap.css" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css" rel="stylesheet">
     <title>Adex Bank Open Account Page 1</title>
   </head>
   <body>
+    <div class="main-main">
     <div class="w-100 login d-flex justify-content-between">
       <div class="d-flex text-white mt-auto mb-auto">
         <i class="fas fa-angle-left fs-1" onclick="goBack()"></i>
@@ -17,11 +19,11 @@
       </div>
       <img src="pic/ade.png" alt="" class="login-img" />
     </div>
-    <div class="w-100 text-center" style="margin-top: 60px">
+    <div class="w-100 text-center form-div" style="margin-top: 60px">
       <img
         src="pic/Mobile-Push-Notifications.jpg"
         alt=""
-        class="w-100 bg-black position-fixed"
+        class="w-100 bg-black position-fixed form-div-img"
         style="
           object-fit: 10% 20%;
           object-position: 10% 10%;
@@ -31,7 +33,7 @@
       />
       <!-- <form> -->
       <div
-        class="bg-light position-fixed w-100 px-4 py-5"
+        class="bg-light position-fixed w-100 px-4 py-5 form-div-div"
         style="
           border-top-left-radius: 30px;
           border-top-right-radius: 30px;
@@ -41,6 +43,19 @@
           overflow-y: scroll;
         "
       >
+
+
+      
+      <!-- <div class="row">
+        <div class="col-sm-2 text-center">
+          <p><button class="btn btn-primary sweet-3" onclick="_gaq.push(['_trackEvent', 'example', 'try', 'sweet-3']);">Try It</button></p>
+        </div>
+        <div class="col-sm-10">
+          <pre>swal("Good job!", "You clicked the button!", "success")</pre>
+        </div>
+      </div> -->
+
+
         <h3>Join the Adex family</h3>
         <div class="w-100 d-flex justify-content-between my-4">
           <span
@@ -78,11 +93,15 @@
             style="text-align: left"
             >Email Address</label
           >
-          <input
+          <div class="d-flex">
+            <input
             type="text"
             class="form-control form-control-md"
-            id="eAddress"
+            id="eAddress" onkeyup="validateEmail()"
           />
+          <!-- <i class="fas fa-check-circle fs-1" style="display: none;" id="check"></i> -->
+          </div>
+          <div class="start-0 w-100 text-start" style="display: none;" id="em">Please provide a valid email address</div>
         </div>
         <div class="mb-4">
           <label
@@ -387,9 +406,7 @@
           <input type="checkbox" name="" id="" class="" style="width: 18px" />
           <h4>I don't 'have a BVN</h4>
         </div>
-        <button data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop"
-          class="btn form-control p-2 text-white text-capitalize fs-1 my-4"
+        <button class="btn form-control p-2 text-white text-capitalize fs-1 my-4"
           style="background-color: rgb(235, 0, 0); border-radius: 12px" 
           onclick="toOpenAcc2()"
           
@@ -406,29 +423,30 @@
     <!-- </form> -->
     </div>
 
-    <div
-      class="modal fade"
-      id="staticBackdrop"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" id="openModal">
-        <div class="modal-content">
+
+
+
+
+  
+
+
+
+    <div id="successModalContainer" class="my-modal">
+      <div id="successModal" style="top: 0% !important" class="">
+        <div class="modal-content bg-white p-4">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="staticBackdropLabel">
               Debit Card
             </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button class="btn btn-lg px-4 d-flex">
+              <i
+                class="fas fa-times text-secondary fs-1 my-auto"
+                onclick="closeMyModal()"
+              ></i>
+            </button>
           </div>
-          <div class="modal-body">
+          <hr>
+          <div class="modal-body py-3">
             <h4 class="w-100 pb-4" style="text-align: center">
               Operation Successful
             </h4>
@@ -537,10 +555,11 @@
               </div>
             </div>
           </div>
-          <div class="modal-footer">
+          <hr>
+          <div class="modal-footer mt-3 gap-3">
             <button
               type="button"
-              class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showCardPin()">
+              class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showCardPin()">
               View Card PIN
             </button>
             <button
@@ -555,31 +574,32 @@
       </div>
     </div>
 
+   
 
-
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Card PIN</h1>
-        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-      </div>
-      <div class="modal-body">
-        <div class="d-flex gap-2 mb-4">
-          <h1 class="text-capitalize">card PIN:</h1>
-          <h1 class="" id="dispCardPin"></h1>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog pin-div">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Card PIN</h1>
+            </div>
+            <div class="modal-body h-auto">
+              <div id="welcomeMsg" class="fs-3"></div>
+              <div class="d-flex gap-2 mb-4 mt-4">
+                <h1 class="text-capitalize">card PIN:</h1>
+                <h1 class="" id="dispCardPin"></h1>
+              </div>
+              <input class="fs-1" id="myNewPIN"></input>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" onclick="confirmClose()">Close</button>
+              <button type="button" class="btn btn-primary" disabled onclick="updatePIN()">Update PIN</button>
+            </div>
+          </div>
         </div>
-        <input class="fs-1" id=""></input>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="window.location.href = 'adexAppHomePage.html'">Close</button>
-        <button type="button" class="btn btn-primary" disabled onclick="updatePIN('index')">Update PIN</button>
       </div>
     </div>
-  </div>
-</div>
     <script src="adexApp.js"></script>
     <script src="bootstrap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
   </body>
 </html>
