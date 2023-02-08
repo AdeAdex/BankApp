@@ -326,15 +326,26 @@ continueReg = () => {
       window.location.href = "adexAppRegistrationPage2.html";
     } 
     else {
-      alert("Incorrect details. Try again");
+      sweet2()
     }  
   
+}
+
+
+sweet2 = () => {
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: 'Incorrect details. Try again!',
+    footer: '<a href="">Why do I have this issue?</a>'
+  })
 }
 
 
 // Function that display the user card pin
 
 let showCardPin = () => {
+  welcomeMsg.innerHTML  = `Thank you for opening an account with us at Adex Bank, just because you choose us, we've compensate you with a total sum of ₦1,000 which can be use to perform any transactions and you can as well deposit money from your dashboard by clicking on the Deposit icon. Always check your dashboard history and transfer history for how you perform transactions. Also note that a ₦10 charges will be deducted on every transfer you make. Thanks`
   for (let index = 0; index < allCustomer.length; index++) {
     dispCardPin.innerHTML = `
     ${allCustomer[index].atmPIN}
@@ -343,25 +354,33 @@ let showCardPin = () => {
   }
 }
 
+
+
 // Function that check if the pin entered correspond to the saved one
 
 let otp;
 continueReg2 = () => {
-  let tryGo = document.querySelectorAll('.pin-for-user-select')
+  let tryGo = document.querySelectorAll('.pin-for-user-select');
+  let PAN = document.querySelectorAll('.PAN-for-user-select');
   let found = false;
   // allCustomer.map((eachUser, index) => {
     for (let index = 0; index < tryGo.length; index++) {
       if (
-        tryGo[index].value == allCustomer[currentUserIndex].atmPIN
+        tryGo[index].value == allCustomer[currentUserIndex].atmPIN/*  && PAN[index].value == allCustomer[currentUserIndex].atmCardNumber */
       ) {
         found = true;
         break;
       }/* }) */
     }
   if (found) {
-    window.location.href = "adexAppRegistrationPage3.html";
+    window.location.href = "adexAppRegistrationPage3.html"
   } else {
-    alert("You've entered incorrect pin. Try again");
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: "You've enterd incorrect Pin. Try again!",
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
   }  
 }
 
@@ -369,7 +388,12 @@ continueReg2 = () => {
 // Function that generate otp and display Acc No on Registration page 3 and display success modal on registration page 3
 let put = () => {
   otp = `${Math.floor(Math.random() * 100000)}`;
-  alert(`Your One Time Password (OTP) is: ${otp}`)
+    swal.fire("Nice!", `Your One Time Password (OTP) is: ${otp}`, "success"
+    )/* .then((result) => {
+      if (result.isConfirmed) {
+        
+      }
+    }) */
   mumu.innerHTML = `xxxxx`
   accNo.innerHTML = `Account: ${allCustomer[currentUserIndex].accNo}`
   successConfirm.innerHTML = `Registration is successful. Please login to your account`
@@ -395,11 +419,25 @@ closeMyRegSuccessModal = () => {
 
 
 confirmPass = () => {
+  con.style.display = `block`
   if (accPass.value == confirmAccPass.value) {
-    alert("Password match")
+      con.innerHTML = `Password match`
+      con.style.color = `green`
   } else {
-    alert("Password does not match")
+    con.innerHTML = `Password does not match`
+    con.style.color = `red`
   }
+}
+
+goo = () => {
+  con2.style.display = `block`
+  if (transPIN.value == confirmTransPIN.value) {
+    con2.innerHTML = `Pin match`
+    con2.style.color = `green`
+} else {
+  con2.innerHTML = `Pin does not match`
+  con2.style.color = `red`
+}
 }
 
 // Function that generate otp and display Acc No on Registration page 3 and display success modal on registration page 3
@@ -412,7 +450,16 @@ continueReg3 = () => {
     }
   })
   if (found && (allCustomer[currentUserIndex].registeredAcc).includes(allCustomer[currentUserIndex].accNo)) {
-    alert("You have successfully registered. Please login to your account")
+    Swal.fire({
+      icon: 'warning',
+      title: 'Operation denied',
+      text: 'You have successfully registered. Please login to your account!',
+      footer: '<a href="">Why do I have this issue?</a>'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = `adexAppHomePage.html`
+      }
+    })
   } else if (found && !(allCustomer[currentUserIndex].registeredAcc).includes(allCustomer[currentUserIndex].accNo)) {
     allCustomer[currentUserIndex].password = accPass.value;
     allCustomer[currentUserIndex].transactionPIN = transPIN.value;
@@ -420,7 +467,7 @@ continueReg3 = () => {
     localStorage.setItem("customerPersonalDetails", JSON.stringify(allCustomer));
    regSuccessModalContainer.style.display = "block"
   } else {
-    alert("Incorrect details")
+    sweet2()
   }
 }
 
@@ -442,10 +489,34 @@ signIn = () => {
     if (found) {
       window.location.href = "adexAppDashboardPage.html";
     } else {
-      alert("Incorrect details. Try again");
+      sweet2()
     }
     
 }
+
+
+
+// Regex for validating email addresses
+
+validateEmail = () => {
+  let found = false;
+  em.style.display = "block";
+  let emailRegex =  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (eAddress.value.match(emailRegex)) {
+    found = true;
+  }
+  if (found) {
+    em.innerHTML = ''
+    // em.style.color = 'green';
+    // check.style.display = "block";
+    // check.style.color = "green";
+  } else {
+    em.innerHTML = 'Please enter a valid email address'
+    em.style.color = 'red'
+    // check.style.display = "none";
+  }
+}
+
 
 
 // Function that register user and push their registration details
@@ -459,21 +530,27 @@ let toOpenAcc2 = () => {
   for (let index = 0; index < allCustomer.length; index++) {
     if (allCustomer[index].phonenumber == mNumber.value || allCustomer[index].email == eAddress.value || allCustomer[index].bvn == bvn.value) {
       foundInRegistry = true;
-      // return;
     }
   }
  
   if (mNumber.value == "" && eAddress.value == "") {
-    alert("Fill the form");
-    // openModal.style.display = "none"
-    // modalForm.hide();
-    // $('#staticBackdrop').modal('hide')
-    // $('.modal-backdrop').hide()
-    // staticBackdrops.removeClass('show')
-    // staticBackdrops.classList.remove('show')
+    Swal.fire({
+      icon: 'warning',
+      title: 'Try again',
+      text: 'Please fill out all the field!',
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
+    successModalContainer.style.display = "none"
   } if (foundInRegistry) {
-    alert(`This Mobile Number, email or BVN has already been registered \nKindly proceed to Register device and later Login with your details and if you need any assistance,\nWe are always here to help you. \nContact us: adeoluadex@gmail.com Telephone: 234-7033959586`)
+    successModalContainer.style.display = "none"
+    Swal.fire({
+      icon: 'error',
+      title: 'Details found!',
+      text: `This Mobile Number, email or BVN has already been registered. \nKindly proceed to Register device and then Login with your details and if you need any assistance,\nWe are always here to help you. \nContact us: adeoluadex@gmail.com Telephone: 234-7033959586`,
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
   } else if (foundInRegistry === false && mNumber.value != "") {
+    sweet()
     let customerDetails = {
       phonenumber: mNumber.value,
       email: eAddress.value,
@@ -492,8 +569,8 @@ let toOpenAcc2 = () => {
       stateOfOrigin: stateOrigin.value,
       stateOfResidence: stateResidence.value,
       address: rAddress.value,
-      balance: 1000,
-      charges: 26,
+      balance: 0,
+      charges: 10,
       password: '',
       transactionPIN: '',
       history: [],
@@ -504,27 +581,56 @@ let toOpenAcc2 = () => {
       registeredAcc: [],
       atmPIN: `${Math.floor(Math.random() * 10000)}`,
       accNo: `221${Math.floor(Math.random() * 10000000)}`,
-      atmCardNumber: `5399 ${Math.floor(Math.random() * 10000)} ${Math.floor(
+      atmCardNumber: `5399${Math.floor(Math.random() * 10000)}${Math.floor(
         Math.random() * 10000
-      )} ${Math.floor(Math.random() * 10000)}`,
+      )}${Math.floor(Math.random() * 10000)}`,
     };
     allCustomer.push(customerDetails);
     localStorage.setItem(
       "customerPersonalDetails",
       JSON.stringify(allCustomer)
     );
+    
     // window.location.href = "adexAppOpenAccPage2.html";
     atmView();
   }
 };
 
 
+// Function to change ATM PIN
+
+let updatePIN = () => {
+  for (let index = 0; index < allCustomer.length; index++) {
+    customerDetails = {...customerDetails, atmPIN: myNewPIN.value}
+  }
+  localStorage.setItem('customerPersonalDetails', JSON.stringify(allCustomer))
+}
+
+sweet = () => {
+  swal.fire("Good job!", "Thank you for opening an account with us at Adex Bank, just because you choose us, we've compensate you with a total sum of ₦1,000 which can be use to perform any transactions and you can as well deposit money from your dashboard by clicking on the Deposit icon. Always check your dashboard history and transfer history for how you perform transactions. Also note that a ₦10 charges will be deducted on every transfer you make. Thanks", "success"
+  ).then((result) => {
+    if (result.isConfirmed) {
+      // Swal.fire('Saved!', '', 'info')
+      successModalContainer.style.display = "block"
+    }
+  })
+
+  // successModalContainer.style.display = "block"
+}
+
+
+// hey = () => {
+//   for (let index = 0; index < allCustomer.length; index++) {
+//     alert(`${allCustomer[index].atmCardNumber.replace(/ /g,"_")}`)
+//   }
+// }
+
 // Function that display and create an atm card for user
 
 let atmView = () => {
   for (let index = 0; index < allCustomer.length; index++) {
     atmName.innerHTML = `
-    ${allCustomer[index].firstName} ${allCustomer[index].middleName.substring(0,1)} ${allCustomer[index].lastName}
+    ${allCustomer[index].firstName} ${allCustomer[index].middleName.substring(0,1)}. ${allCustomer[index].lastName}
     `;
     atmCardNo.innerHTML = `
     ${allCustomer[index].atmCardNumber}
@@ -541,6 +647,40 @@ let atmView = () => {
     atm.classList.remove("animate");
   }, 5000);
 };
+
+
+confirmClose = () => {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this! Make sure you have the following details saved:  \n Account Number \n ATM Card Number \n ATM PIN",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Done'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        // 'Thank You! ',
+        // '',
+        // 'success'
+        window.location.href = `adexAppHomePage.html`
+      )
+    }
+  })
+  // swal.fire({
+  //   title: "Are you sure?",
+  //   text: "Your will not be able to recover this imaginary file!",
+  //   type: "warning",
+  //   showCancelButton: true,
+  //   confirmButtonClass: "btn-danger",
+  //   confirmButtonText: "Yes, delete it!",
+  //   closeOnConfirm: false
+  // },
+  // function(){
+  //   swal.fire("Deleted!", "Your imaginary file has been deleted.", "success");
+  // });
+}
 
 
 currentUserIndex = localStorage.getItem("currentUserIndex");
@@ -564,7 +704,6 @@ genDashboard = () => {
 
     toAccountModal.innerHTML = `${allCustomer[currentUserIndex].firstName} ${allCustomer[currentUserIndex].lastName} - ${allCustomer[currentUserIndex].accNo} <br>₦ ${allCustomer[currentUserIndex].balance}
     `
-    //deposit()
   }
   localStorage.setItem("customerPersonalDetails", JSON.stringify(allCustomer));
 
@@ -657,7 +796,7 @@ loadTransferHistoryHistory = () => {
   currentCustomerHistory = allCustomer[currentUserIndex].transferHistory;
   for (let index = 0; index < currentCustomerHistory.length; index++) {
     historyContainer.innerHTML += `
-    <div class="d-grid w-100 px-3 py-3 container shadow rounded rounded-2" style="border-left: 4px solid red; font-size: 12px" id="failedTrans" onclick="displayMyReceipt(${index})" data-bs-toggle="modal"
+    <div class="d-grid w-100 px-3 py-3 container shadow rounded rounded-2" style="border-left: 4px solid red; font-size: 12px; cursor: pointer" id="failedTrans" onclick="displayMyReceipt(${index})" data-bs-toggle="modal"
     data-bs-target="#exampleModal">
     <div class="d-flex justify-content-between">
     <div>${currentCustomerHistory[index].airtimeDay}</div>
@@ -708,11 +847,7 @@ pasteDepositPin = (param) => {
         transactionDay: dayss.toDateString(),
         transactionType: `Self`,
         transactionDate: dayss.toDateString() + " " + dayss.toLocaleTimeString(),
-        // transactionDebitAccount: allCustomer[currentUserIndex].accNo,
         transactionCreditAccount: allCustomer[currentUserIndex].accNo,
-        // transactionBeneficiary: accountNameTo.innerHTML,
-        // transactionBank: banks.value,
-        // transactionNarration: descriptn.value,
         transactionStatus: `Success`,
         transactionAmount: depositInput.value,
         receipt: [],
@@ -732,6 +867,50 @@ pasteDepositPin = (param) => {
       confirmTxt.innerHTML = `Operation failed Try again. Make sure you are entering the right Pin`
       inpTry.value = ""
     }
+}
+
+
+
+
+// Function that generate Deposit Receipt on Deposit Receipt Page
+genDepositReceipt = () => {
+  currentDepositReceipt = allCustomer[currentUserIndex].depositReceipt;
+  depositReceiptContainer.innerHTML = "";
+  currentDepositReceipt.map((eachUser, index) => {
+    depositReceiptContainer.innerHTML = `
+    <div class="text-center p-1 text-white mt-3" style="background-color: rgb(235, 0, 0)">
+      ${currentDepositReceipt[index].transactionDay}
+    </div>
+    <div class="py-2"
+      style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transType">
+      <span class="fw-bold">transaction type:</span>
+      ${currentDepositReceipt[index].transactionType}
+    </div>
+    <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transDate">
+      <span class="fw-bold">transaction date:</span>
+      ${currentDepositReceipt[index].transactionDate}
+    </div>
+    <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transCreditAcc">
+      <span class="fw-bold">credit account:</span>
+      ${currentDepositReceipt[index].transactionCreditAccount}
+    </div>
+    <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transStatus">
+      <span class="fw-bold">status:</span>
+      ${currentDepositReceipt[index].transactionStatus}
+    </div>
+    <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transAmount">
+      <span class="fw-bold">amount:</span>
+      ₦${currentDepositReceipt[index].transactionAmount}
+    </div>
+    <div class="mt-3 px-3" style="font-size: 8px">
+      Disclaimer: Your transaction has been successfully processed. Note, however,
+      that completion of any deposit may be affected by other factors including but
+      not limited to transmission errors. all transaction are subject to Adex
+      confirmation and fraud proof verification
+    </div>
+    `
+      
+   })
 }
     
 
@@ -833,11 +1012,26 @@ networkSelect = (parameterize) => {
 let nevers = false;
 confirmAirtimeTrans = (netType) => {
   if (airtimeTo.value == "" || shege.innerHTML == "" || airtimeAmount.value == "" || clicked == false) {
-    alert("Select an Account, select airtime mode and Fill ")
+    Swal.fire({
+      icon: 'warning',
+      title: 'Try again',
+      text: 'Select an Account, select airtime mode and Fill!',
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
   } else if (airtimeAmount.value > allCustomer[currentUserIndex].balance) {
-    alert("Insufficient fund");
+    Swal.fire({
+      icon: 'warning',
+      title: 'Try again',
+      text: 'Insufficient fund!',
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
   } else if (airtimeAmount.value < 100) {
-    alert("Amount too low");
+    Swal.fire({
+      icon: 'warning',
+      title: 'Try again',
+      text: 'Amount too low!, minimum amount is ₦100',
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
   } else {
     nevers = true;
   }
@@ -861,7 +1055,6 @@ checkFor = () => {
 
 pasteValue = (param) => {
   // document.querySelectorAll('.input-digit').forEach(el => el.onkeyup = e => e.target.value && el.nextElementSibling.focus())
-  // currentChargeHistory = allCustomer[currentUserIndex].history.chargesAmount
   inpTry.value += param;
   confirmTxt.innerHTML = "";
     if (inpTry.value == allCustomer[currentUserIndex].transactionPIN) {
@@ -899,10 +1092,14 @@ checkForThisAccNo = () => {
       return
     } 
     if (foundAccNo) {
-      // nameName.style.display = "block !important"
       accountNameTo.innerHTML = `${allCustomer[index].firstName} ${allCustomer[index].lastName}`
     } else {
-      alert("Account not found")
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: 'Account not found! but you can still proceed',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
     }
   })
   
@@ -913,11 +1110,26 @@ checkForThisAccNo = () => {
 let notSure = false;
 confirmTransferTrans = (netType) => {
   if (banks.value == "" || transAmountTo.value == "" || accountTo.value == "" ||  pasteClicked == false) {
-    alert("Select an Account, select transfer mode and Fill ")
+    Swal.fire({
+      icon: 'warning',
+      title: 'Try again',
+      text: 'Select an Account, select airtime mode and Fill!',
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
   } else if (transAmountTo.value > allCustomer[currentUserIndex].balance) {
-    alert("Insufficient fund");
+    Swal.fire({
+      icon: 'warning',
+      title: 'Try again',
+      text: 'Insufficient fund!',
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
   } else if (transAmountTo.value < 50) {
-    alert("Amount too low");
+    Swal.fire({
+      icon: 'warning',
+      title: 'Try again',
+      text: 'Amount too low!, minimum amount is ₦50',
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
   } else {
     notSure = true;
   }
@@ -1168,12 +1380,6 @@ let switchType = () => {
 };
 
 
-// Function to change ATM PIN
-
-let updatePIN = (userIndex) => {
-  allCustomer.atmPIN.splice(userIndex, 1, cardPIN.value)
-  localStorage.setItem('customerPersonalDetails', JSON.stringify(allCustomer))
-}
 
 // allCustomer = JSON.parse(localStorage.getItem("customerPersonalDetails"));
 // let currentUserIndex = localStorage.getItem("currentUserIndex");
@@ -1276,7 +1482,7 @@ let userSelect = (regType) => {
             onKeyPress="if(this.value.length==6) return false;"
             pattern="[0-9]*"
             maxlength="6"
-            class="login-input form-control form-control-lg"
+            class="login-input form-control form-control-lg PAN-for-user-select"
             id="PAN"
             value=""
             required
@@ -1315,7 +1521,7 @@ let userSelect = (regType) => {
             onKeyPress="if(this.value.length==6) return false;"
             pattern="[0-9]*"
             maxlength="6"
-            class="login-input form-control form-control-lg"
+            class="login-input form-control form-control-lg PAN-for-user-select"
             id="PAN"
             value=""
             required
@@ -1354,7 +1560,7 @@ let userSelect = (regType) => {
             onKeyPress="if(this.value.length==6) return false;"
             pattern="[0-9]*"
             maxlength="6"
-            class="login-input form-control form-control-lg"
+            class="login-input form-control form-control-lg PAN-for-user-select"
             id="PAN"
             value=""
             required
@@ -1391,9 +1597,12 @@ function openContactPicker() {
   if (supported) {
     getContacts();
   } else {
-    alert(
-      "Contact list API not supported!. Only for android mobile chrome and chrome version > 80"
-    );
+    Swal.fire({
+      icon: 'warning',
+      title: 'Try again',
+      text: 'Contact list API not supported!. Only for android mobile chrome and chrome version > 80',
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
   }
 }
 async function getContacts() {
@@ -1402,9 +1611,19 @@ async function getContacts() {
 
   try {
     const contacts = await navigator.contacts.select(props, opts);
-    alert(JSON.stringify(contacts));
+    Swal.fire({
+      // icon: 'warning',
+      // title: 'Try again',
+      text: `${JSON.stringify(contacts)}`,
+      // footer: '<a href="">Why do I have this issue?</a>'
+    })
   } catch (err) {
-    alert(err);
+    Swal.fire({
+      icon: 'warning',
+      // title: 'Try again',
+      text: `${err}`,
+      // footer: '<a href="">Why do I have this issue?</a>'
+    })
   }
 }
 
@@ -1440,34 +1659,4 @@ let devices = () => {
   myDevice.innerHTML = navigator.userAgent;
 };
 
-
-
-   
-      // if (currentReceipt[index].transactionDebitAccount == undefined || currentReceipt[index].transactionBeneficiary == undefined || currentReceipt[index].transactionBank == undefined || currentReceipt[index].transactionNarration == undefined) {
-      //   receiptContainer.innerHTML = `
-      //   <div class="text-center p-1 text-white mt-3" style="background-color: rgb(235, 0, 0)">
-      //   ${currentReceipt[index].transactionDay}
-      //   </div>
-      //   <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transType">
-      //         <span class="fw-bold">transaction type:</span> ${currentReceipt[index].transactionType}
-      //       </div>
-      //       <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transDate">
-      //       <span class="fw-bold">transaction date:</span> ${currentReceipt[index].transactionDate}
-      //       </div>
-      //       <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transCreditAcc">
-      //       <span class="fw-bold">credit account:</span> ${currentReceipt[index].transactionCreditAccount}
-      //       </div>
-      //       <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transStatus">
-      //       <span class="fw-bold">status:</span> ${currentReceipt[index].transactionStatus}
-      //       </div>
-      //       <div class="py-2" style="border-bottom: 1px solid lightgray; border-bottom-style: dashed" id="transAmount">
-      //       <span class="fw-bold">amount:</span> ₦${currentReceipt[index].transactionAmount}
-      //       </div>
-      //       <div class="mt-3 px-3" style="font-size: 8px">
-      //         Disclaimer: Your transaction has been successfully processed.
-      //         Note, however, that completion of any transfer may be affected by other factors including but not limited to transmission errors.
-      //         all transaction are subject to Adex confirmation and fraud proof verification
-      //       </div>
-        
-      //   `
-      // } 
+  
