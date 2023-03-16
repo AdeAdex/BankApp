@@ -91,9 +91,9 @@ help = (para) => {
         <hr class="help-hr" />
         <div class="d-grid">
           <a href="" class="text-decoration-none pb-2">07033959586</a>
-          <a href="" class="text-decoration-none pb-2">09012345678</a>
-          <a href="" class="text-decoration-none pb-2">09012345678</a>
-          <a href="" class="text-decoration-none pb-2">09012345678</a>
+          <a href="" class="text-decoration-none pb-2">09014145628</a>
+          <a href="" class="text-decoration-none pb-2">07033959586</a>
+          <a href="" class="text-decoration-none pb-2">09014145628</a>
         </div>
         <div class="d-flex justify-content-between mt-4">
           <h6>Email</h6>
