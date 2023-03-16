@@ -127,9 +127,7 @@ help = (para) => {
       </div>
     `;
   } else if (para == 2) {
-    variousHelp.innerHTML = `
-    mumu
-    `;
+    variousHelp.innerHTML = `Still Developing this`;
   } else if (para == 3) {
     variousHelp.innerHTML = `
     <div class="w-100 login d-flex justify-content-between">
