@@ -562,7 +562,7 @@ let toOpenAcc2 = () => {
     Swal.fire({
       icon: 'error',
       title: 'Details found!',
-      text: `This Mobile Number, email or BVN has already been registered. \nKindly proceed to Register device and then Login with your details and if you need any assistance,\nWe are always here to help you. \nContact us: adeoluadex@gmail.com Telephone: 234-7033959586`,
+      text: `This Mobile Number, email or BVN has already been registered. \nKindly proceed to Register device and then Login with your details and if you need any assistance,\nWe are always here to help you. \nContact us: adeoluamole@gmail.com Telephone: 234-7033959586`,
       footer: '<a href="">Why do I have this issue?</a>'
     })
   } else if (foundInRegistry === false && mNumber.value != "") {
