@@ -358,7 +358,7 @@ body {
 
   #accountModal #accountModal .modal-dialog, #accountModal .modal-content, 
   .login-container, #successModal, .form-div, .form-div-div, 
-  .form-div-img, #depositModal, #confirmModal {
+  .form-div-img, #depositModal, #confirmModal, #changePasswordModal, #changePinModal, #forgotPasswordModal, #forgotDetailsModal {
     max-width: 30% !important;
   }
 
