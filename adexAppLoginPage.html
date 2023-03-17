@@ -7,65 +7,134 @@
     <link rel="stylesheet" href="adexApp.css" />
     <link href="fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="bootstrap.css" />
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css"
+      rel="stylesheet"
+    />
     <title>Adex Bank LoginPage</title>
   </head>
   <body onload="validateLoginOnload()">
     <div class="main-main">
-    <div class="w-100 login d-flex justify-content-between">
-      <div class="d-flex text-white mt-auto mb-auto">
-        <i class="fas fa-angle-left fs-1" onclick="goBack(`${window.location.href = 'adexAppHomePage.html'}`)"></i>
-        <h4>Welcome</h4>
-      </div>
-      <img src="pic/ade.png" alt="" class="login-img" />
-    </div>
-    <div class="login-main p-5">
-      <div class="mb-4">
-        <label for="validationCustom02" class="form-label fw-bold"
-          >Account Number</label
-        >
-        <input
-          type="number" pattern="[0-9]*" inputmode ="numeric" maxlength="10" onKeyPress="if(this.value.length==10) return false;" onkeyup="validateLogin()"
-          class="login-input form-control pt-3 pb-3"
-          id="loginAcc"
-          value=""
-          required
-          placeholder="Account Number"
-        />
-      </div>
-      <div class="mb-4">
-        <label for="validationCustom02" class="form-label fw-bold"
-          >Password</label
-        >
-        <input
-          type="password" 
-          class="login-input form-control pt-3 pb-3"
-          placeholder="Password"
-          id="pass"
-        />
-      </div>
-      <div>
-        <div class="check w-100 d-flex flex-column">
-          <span class="container-check-txt d-flex mt-auto mb-auto">
-            <input type="checkbox" id="checkBox" required />&nbsp; Remember login
-          </span>
+      <div class="w-100 login d-flex justify-content-between">
+        <div class="d-flex text-white mt-auto mb-auto">
+          <i
+            class="fas fa-angle-left fs-1"
+            onclick="goBack(`${window.location.href = 'adexAppHomePage.html'}`)"
+          ></i>
+          <h4>Welcome</h4>
         </div>
-        <button
-          class="btn btn-secondary w-100 mt-3 mb-4 pt-2 pb-2 text-uppercase"
-          id="loginBtn"
-          onclick="signIn()"
-        >
-          sign in
-        </button>
-        <a href="" id="forgotPass" class="w-auto d-flex text-decoration-none justify-content-center mt-1 text-black"
-        >Forgot password?</a
-      >
+        <img src="pic/ade.png" alt="" class="login-img" />
+      </div>
+      <div class="login-main p-5">
+        <div class="mb-4">
+          <label for="validationCustom02" class="form-label fw-bold"
+            >Account Number</label
+          >
+          <input
+            type="number"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            maxlength="10"
+            onKeyPress="if(this.value.length==10) return false;"
+            onkeyup="validateLogin()"
+            class="login-input form-control pt-3 pb-3"
+            id="loginAcc"
+            value=""
+            required
+            placeholder="Account Number"
+          />
+        </div>
+        <div class="mb-4">
+          <label for="validationCustom02" class="form-label fw-bold"
+            >Password</label
+          >
+          <input
+            type="password"
+            class="login-input form-control pt-3 pb-3"
+            placeholder="Password"
+            id="pass"
+          />
+        </div>
+        <div>
+          <div class="check w-100 d-flex flex-column">
+            <span class="container-check-txt d-flex mt-auto mb-auto">
+              <input type="checkbox" id="checkBox" required />&nbsp; Remember
+              login
+            </span>
+          </div>
+          <button
+            class="btn btn-secondary w-100 mt-3 mb-4 pt-2 pb-2 text-uppercase"
+            id="loginBtn"
+            onclick="signIn()"
+          >
+            sign in
+          </button>
+          <a
+            id="forgotPass"
+            class="w-auto d-flex text-decoration-none justify-content-center mt-1 text-black"
+            data-bs-toggle="modal"
+            data-bs-target="#forgotPasswordModal"
+            >Forgot password?</a
+          >
+        </div>
       </div>
     </div>
+
+    <div
+      class="modal fade"
+      id="forgotPasswordModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Forgot Password
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-4">
+              <label for="validationCustom02" class="form-label fw-bold"
+                >Phone Number / Email address</label
+              >
+              <input
+                type="text"
+                class="login-input form-control pt-3 pb-3 text-lowercase"
+                value=""
+                id="forgotPasswordInput"
+                required
+                placeholder="Enter Phone Number or email address"
+              />
+            </div>
+
+            <div
+              class="container-fluid shadow d-flex flex-column gap-2 p-3"
+              id="myPass"
+            ></div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="forgotLoginDetails()"
+            >
+              Send
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+
     <script src="adexApp.js"></script>
     <script src="bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
-
   </body>
 </html>
