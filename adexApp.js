@@ -613,11 +613,86 @@ let toOpenAcc2 = () => {
 };
 
 
+// Forgot password function
+
+forgotLoginDetails = () => {
+  myPass.innerHTML = ""
+  let found = false;
+  for (let index = 0; index < allCustomer.length; index++) {
+    if (forgotPasswordInput.value == allCustomer[index].phonenumber || forgotPasswordInput.value == allCustomer[index].email) {
+      found = true;
+    }
+  }
+  if (forgotPasswordInput.value == "") {
+    Swal.fire({
+      icon: 'warning',
+      title: '',
+      text: 'This field can not be empty!',
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
+  } 
+  for (let index = 0; index < allCustomer.length; index++) {
+    if (found && forgotPasswordInput.value != "") {
+      myPass.style.display = "block";
+      myPass.innerHTML = `
+        <div id="userAccNo">Your Password is: ${allCustomer[currentUserIndex].password}</div>
+      `
+    } else if (!found && forgotPasswordInput.value != "") {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Try again',
+        text: 'Incorrect Details!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
+    }
+    
+  }  
+}
+
+
+// Function that shows user details if they dont remember it again
+
+forgotDetails = () => {
+  myInfo.innerHTML = ""
+  let found = false;
+  for (let index = 0; index < allCustomer.length; index++) {
+    if (forgotCustomerDetails.value == allCustomer[index].phonenumber || forgotCustomerDetails.value == allCustomer[index].email) {
+      found = true;
+    }
+  }
+  if (forgotCustomerDetails.value == "") {
+    Swal.fire({
+      icon: 'warning',
+      title: '',
+      text: 'This field can not be empty!',
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
+  } 
+  for (let index = 0; index < allCustomer.length; index++) {
+    if (found && forgotCustomerDetails.value != "") {
+      myInfo.style.display = "block";
+      myInfo.innerHTML = `
+        <div id="userAccNo">Account Number: ${allCustomer[index].accNo}</div>
+        <div id="userATMNo">ATM Card Number: ${allCustomer[index].atmCardNumber}</div>
+        <div id="userATMPIN">ATM Pin: ${allCustomer[index].atmPIN}</div>
+      `
+    } else if (!found && forgotCustomerDetails.value != "") {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Try again',
+        text: 'Incorrect Details!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
+    }
+    
+  }  
+}
+
 // Function to change ATM PIN
 
 let updatePIN = () => {
   for (let index = 0; index < allCustomer.length; index++) {
-    customerDetails = {...customerDetails, atmPIN: myNewPIN.value}
+    allCustomer[currentUserIndex].atmPIN = allCustomer[currentUserIndex].atmPIN
   }
   localStorage.setItem('customerPersonalDetails', JSON.stringify(allCustomer))
 }
@@ -668,7 +743,7 @@ let atmView = () => {
 confirmClose = () => {
   Swal.fire({
     title: 'Are you sure?',
-    text: "You won't be able to revert this! Make sure you have the following details saved:  \n Account Number \n ATM Card Number \n ATM PIN",
+    text: "You won't be able to revert this! Make sure you have the following details saved. incase you forgot to save them, you can still get it back at the register device page by clicking 'Forgot account details'",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
