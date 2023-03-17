@@ -511,6 +511,81 @@ signIn = () => {
 }
 
 
+//Function that changes password
+
+changePassword = () => {
+  let found = false
+  for (let index = 0; index < allCustomer.length; index++) {
+    if (oldPassword.value == allCustomer[currentUserIndex].password  && newPassword.value == confirmNewPassword.value) {
+      found = true
+      allCustomer[currentUserIndex].password = newPassword.value;
+      localStorage.setItem('customerPersonalDetails', JSON.stringify(allCustomer))
+      Swal.fire({
+        icon: 'success',
+        title: 'Great Job',
+        text: 'Password changed successfully!',
+      })
+      break;
+    } else if (oldPassword.value == allCustomer[currentUserIndex].password  && newPassword.value != confirmNewPassword.value) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Try again',
+        text: "New Password doesn't match!",
+      })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Try again',
+        text: 'Wrong Old Password!',
+      })
+    }
+  }
+}
+
+confirmMatch = () => {
+  if (newPassword.value === confirmNewPassword.value) {
+    confirmChangePassword.style.backgroundColor = "red"
+  }  
+}
+
+confirmPinMatch = () => {
+  if (newPin.value === confirmNewPin.value) {
+    confirmChangePin.style.backgroundColor = "red"
+  }  
+}
+
+
+changePin = () => {
+  let found = false
+  for (let index = 0; index < allCustomer.length; index++) {
+    if (oldPin.value == allCustomer[currentUserIndex].transactionPIN  && newPin.value == confirmNewPin.value) {
+      found = true
+      allCustomer[currentUserIndex].transactionPIN = newPin.value;
+      localStorage.setItem('customerPersonalDetails', JSON.stringify(allCustomer))
+      Swal.fire({
+        icon: 'success',
+        title: 'Great Job',
+        text: 'Pin changed successfully!',
+      })
+      break;
+    } else if (oldPin.value == allCustomer[currentUserIndex].transactionPIN  && newPin.value != confirmNewPin.value) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Try again',
+        text: "New Pin doesn't match!",
+      })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Try again',
+        text: 'Wrong Old Pin!',
+      })
+    }
+  }
+}
+
+
+
 
 // Regex for validating email addresses
 
@@ -635,7 +710,7 @@ forgotLoginDetails = () => {
     if (found && forgotPasswordInput.value != "") {
       myPass.style.display = "block";
       myPass.innerHTML = `
-        <div id="userAccNo">Your Password is: ${allCustomer[currentUserIndex].password}</div>
+        <div id="userAccNo">Your Password is: ${allCustomer[index].password}</div>
       `
     } else if (!found && forgotPasswordInput.value != "") {
       Swal.fire({
@@ -743,7 +818,7 @@ let atmView = () => {
 confirmClose = () => {
   Swal.fire({
     title: 'Are you sure?',
-    text: "You won't be able to revert this! Make sure you have the following details saved. incase you forgot to save them, you can still get it back at the register device page by clicking 'Forgot account details'",
+    text: "You won't be able to revert this! Make sure you have your details saved. incase you forgot to save them, you can still get it back at the register device page by clicking 'Forgot account details'",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
