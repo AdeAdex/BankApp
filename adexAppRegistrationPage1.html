@@ -7,44 +7,118 @@
     <link rel="stylesheet" href="adexApp.css" />
     <link href="fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="bootstrap.css" />
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css"
+      rel="stylesheet"
+    />
     <title>Adex Bank registrationPage1</title>
   </head>
   <body onload="validateAccNoOnload()">
     <div class="main-main">
-    <div class="w-100 login d-flex justify-content-between">
-      <div class="d-flex text-white mt-auto mb-auto">
-        <i class="fas fa-angle-left fs-1" onclick="goBack()"></i>
-        <h4>Registration 1/3</h4>
+      <div class="w-100 login d-flex justify-content-between">
+        <div class="d-flex text-white mt-auto mb-auto">
+          <i class="fas fa-angle-left fs-1" onclick="goBack()"></i>
+          <h4>Registration 1/3</h4>
+        </div>
+        <img src="pic/ade.png" alt="" class="login-img" />
       </div>
-      <img src="pic/ade.png" alt="" class="login-img" />
+      <div class="login-main p-4">
+        <div class="mb-4">
+          <label for="validationCustom02" class="form-label fw-bold"
+            >Account Number</label
+          >
+          <input
+            type="number"
+            maxlength="10"
+            class="login-input form-control form-control-lg"
+            id="regAccNo"
+            pattern="/^-?\d+\.?\d*$/"
+            onKeyPress="if(this.value.length==10) return false;"
+            onkeyup="validateAccNo()"
+            value=""
+            required
+            placeholder="Account Number"
+          />
+        </div>
+        <div class="w-100 terms">
+          By registering I agree to Adex Bank's
+          <a href="" class="text-danger text-decoration-none">Terms</a> and
+          <a href="" class="text-danger text-decoration-none">Privacy</a>
+          <a href="" class="text-danger text-decoration-none">Policy</a>
+        </div>
+        <div>
+          <button
+            class="btn btn-secondary w-100 mt-3 mb-4 pt-3 pb-3 text-uppercase"
+            id="continueBtn"
+            onclick="continueReg()"
+          >
+            continue
+          </button>
+
+          <a
+            id="forgotPass"
+            class="w-auto d-flex text-decoration-none justify-content-center mt-1 text-black"
+            data-bs-toggle="modal"
+            data-bs-target="#forgotDetailsModal"
+            >Forgot account details?</a
+          >
+        </div>
+      </div>
     </div>
-    <div class="login-main p-4">
-      <div class="mb-4">
-        <label for="validationCustom02" class="form-label fw-bold"
-          >Account Number</label
-        >
-        <input
-          type="number" maxlength="10"
-          class="login-input form-control form-control-lg"
-          id="regAccNo" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" onkeyup="validateAccNo()"
-          value=""
-          required
-          placeholder="Account Number"
-        />
-      </div>
-      <div class="w-100 terms">By registering I agree to Adex Bank's <a href="" class="text-danger text-decoration-none">Terms</a> and <a href="" class="text-danger text-decoration-none">Privacy</a>  <a href="" class="text-danger text-decoration-none">Policy</a> </div>
-      <div>
-        <button
-          class="btn btn-secondary w-100 mt-3 mb-4 pt-3 pb-3 text-uppercase"
-          id="continueBtn"
-          onclick="continueReg()"
-        >
-          continue
-        </button>
+
+    <div
+      class="modal fade"
+      id="forgotDetailsModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Forgot Details
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-4">
+              <label for="validationCustom02" class="form-label fw-bold"
+                >Phone Number / Email address</label
+              >
+              <input
+                type="text"
+                class="login-input form-control pt-3 pb-3 text-lowercase"
+                value=""
+                id="forgotCustomerDetails"
+                required
+                placeholder="Enter Phone Number or email address"
+              />
+            </div>
+
+            <div
+              class="container-fluid shadow d-flex flex-column gap-2"
+              id="myInfo"
+            ></div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="forgotDetails()"
+            >
+              Send
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+
     <script src="adexApp.js"></script>
     <script src="bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
