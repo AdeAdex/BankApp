@@ -767,9 +767,14 @@ forgotDetails = () => {
 
 let updatePIN = () => {
   for (let index = 0; index < allCustomer.length; index++) {
-    allCustomer[currentUserIndex].atmPIN = allCustomer[currentUserIndex].atmPIN
+    allCustomer[index].atmPIN = myNewPIN.value
+    localStorage.setItem('customerPersonalDetails', JSON.stringify(allCustomer))
   }
-  localStorage.setItem('customerPersonalDetails', JSON.stringify(allCustomer))
+  Swal.fire({
+    icon: 'success',
+    title: 'Great Job',
+    text: 'CardPin changed successfully!',
+  })
 }
 
 sweet = () => {
