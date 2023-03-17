@@ -44,17 +44,8 @@
         "
       >
 
-
-      
-      <!-- <div class="row">
-        <div class="col-sm-2 text-center">
-          <p><button class="btn btn-primary sweet-3" onclick="_gaq.push(['_trackEvent', 'example', 'try', 'sweet-3']);">Try It</button></p>
-        </div>
-        <div class="col-sm-10">
-          <pre>swal("Good job!", "You clicked the button!", "success")</pre>
-        </div>
-      </div> -->
-
+      <!-- <button onclick="hello()">hey</button>
+      <div id="hey" class="bg-success text-white p-3"></div> -->
 
         <h3>Join the Adex family</h3>
         <div class="w-100 d-flex justify-content-between my-4">
@@ -63,14 +54,15 @@
             style="
               background-color: rgba(128, 128, 128, 0.396);
               border-radius: 20px;
+              font-size: 12px;
             "
             >Step 1 of 5</span
           >
-          <h5 class="my-auto">Enter your mobile number</h5>
+          <h6 class="my-auto">Enter your mobile number</h6>
         </div>
-        <h2 class="d-flex justify-content-start text-start mt-5 mb-5">
+        <h5 class="d-flex justify-content-start text-start mt-5 mb-5">
           Let's get started with your phone number'
-        </h2>
+        </h5>
         <!-- <div class="w-100 d-grid gap-4">
           <input type="text" class="form-control form-control-md" placeholder="Mobile number" id="phoneNo"
           />
@@ -588,12 +580,13 @@
                 <h1 class="text-capitalize">card PIN:</h1>
                 <h1 class="" id="dispCardPin"></h1>
               </div>
-              <input class="fs-1" id="myNewPIN"></input>
+              <input type="number" onKeyPress="if(this.value.length == 4) return false;" pattern="[0-9]*" maxlength="4" class="fs-1" id="myNewPIN" />
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" onclick="confirmClose()">Close</button>
               <button type="button" class="btn btn-primary"  onclick="updatePIN()">Update PIN</button>
             </div>
+            
           </div>
         </div>
       </div>
