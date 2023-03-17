@@ -324,7 +324,12 @@ continueReg = () => {
       window.location.href = "adexAppRegistrationPage2.html";
     } 
     else {
-      sweet2()
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Incorrect account number. Try again!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
     }  
   
 }
@@ -458,7 +463,7 @@ if (passGood && pinGood) {
 
 // Function that generate otp and display Acc No on Registration page 3 and display success modal on registration page 3
 continueReg3 = () => {
-  let found = false
+  let found = false;
   allCustomer.map((eachUserCon3, index) => {
     if (supplyOTP.value == otp && accPass.value == confirmAccPass.value && transPIN.value == confirmTransPIN.value ) {
       found = true;
@@ -514,7 +519,11 @@ signIn = () => {
 //Function that changes password
 
 changePassword = () => {
-  let found = false
+  let found = false;
+  // let hasNumber = new Regex(r'[0-9]');
+  // let hasLetter = new Regex("[a-zA-Z]+")
+  // let hasMinimum6Chars = new Regex(".{6,}")
+  // let isValidated = hasNumber.contains(newPassword.value) && hasLetter.contains(newPassword.value && hasMinimum6Chars.contains(newPassword.value))
   for (let index = 0; index < allCustomer.length; index++) {
     if (oldPassword.value == allCustomer[currentUserIndex].password  && newPassword.value == confirmNewPassword.value) {
       found = true
@@ -532,7 +541,9 @@ changePassword = () => {
         title: 'Try again',
         text: "New Password doesn't match!",
       })
-    } else {
+    } /* else if ( isValidated ) {
+      alert("lai lai")
+    } */ else {
       Swal.fire({
         icon: 'error',
         title: 'Try again',
@@ -556,7 +567,7 @@ confirmPinMatch = () => {
 
 
 changePin = () => {
-  let found = false
+  let found = false;
   for (let index = 0; index < allCustomer.length; index++) {
     if (oldPin.value == allCustomer[currentUserIndex].transactionPIN  && newPin.value == confirmNewPin.value) {
       found = true
@@ -694,7 +705,7 @@ forgotLoginDetails = () => {
   myPass.innerHTML = ""
   let found = false;
   for (let index = 0; index < allCustomer.length; index++) {
-    if (forgotPasswordInput.value == allCustomer[index].phonenumber || forgotPasswordInput.value == allCustomer[index].email) {
+    if (forgotPasswordInput.value == allCustomer[index].phonenumber || forgotPasswordInput.value == allCustomer[index].accNo) {
       found = true;
     }
   }
@@ -767,14 +778,35 @@ forgotDetails = () => {
 
 let updatePIN = () => {
   for (let index = 0; index < allCustomer.length; index++) {
-    allCustomer[index].atmPIN = myNewPIN.value
-    localStorage.setItem('customerPersonalDetails', JSON.stringify(allCustomer))
+    if (myNewPIN.value == "") {
+      Swal.fire({
+        icon: 'error',
+        title: 'Try again',
+        text: 'The input field can not be empty!',
+      })
+    }else if (myNewPIN.value.length === 4 && myNewPIN.value != allCustomer[index].atmPIN) {
+      allCustomer[index].atmPIN = myNewPIN.value
+      localStorage.setItem('customerPersonalDetails', JSON.stringify(allCustomer));
+       Swal.fire({
+        icon: 'success',
+        title: 'Great Job',
+        text: `CardPin changed successfully to ${allCustomer[index].atmPIN}!`,
+      })
+      dispCardPin.innerHTML = allCustomer[index].atmPIN
+    } else if (myNewPIN.value == allCustomer[index].atmPIN) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Try again!',
+        text: "The new pin cant't be the same as the old pin",
+      })
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Pin must be of four (4) digit',
+        text: 'CardPin not changed!',
+      })
+    }
   }
-  Swal.fire({
-    icon: 'success',
-    title: 'Great Job',
-    text: 'CardPin changed successfully!',
-  })
 }
 
 sweet = () => {
@@ -797,6 +829,11 @@ sweet = () => {
 // }
 
 // Function that display and create an atm card for user
+hello = () => {
+  for (let index = 0; index < allCustomer.length; index++) {
+  hey.innerHTML = `${allCustomer[index].atmCardNumber.toString().replace(/\d{4}(?=.)/g, '$& ')}`
+  }
+}
 
 let atmView = () => {
   for (let index = 0; index < allCustomer.length; index++) {
@@ -804,7 +841,7 @@ let atmView = () => {
     ${allCustomer[index].firstName} ${allCustomer[index].middleName.substring(0,1)}. ${allCustomer[index].lastName}
     `;
     atmCardNo.innerHTML = `
-    ${allCustomer[index].atmCardNumber}
+    ${allCustomer[index].atmCardNumber.match(new RegExp('.{1,4}', 'g')).join(" ") }
     `;
     accName.innerHTML = `
     <h2 class="text-uppercase">account name: <br>${allCustomer[index].firstName} ${allCustomer[index].middleName} ${allCustomer[index].lastName}</h2>
