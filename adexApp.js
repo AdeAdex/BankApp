@@ -489,17 +489,12 @@ continueReg3 = () => {
     localStorage.setItem("customerPersonalDetails", JSON.stringify(allCustomer));
    regSuccessModalContainer.style.display = "block"
   } else if (found && !(allCustomer[currentUserIndex].registeredAcc).includes(allCustomer[currentUserIndex].accNo) && !(accPass.value.match(regex) && confirmAccPass.value.match(regex) )) {
-	
-
-	
-
-
-
-	
-
-	
-} 
- else {
+	Swal.fire({
+        icon: 'error',
+        title: 'Please match the format',
+        text: 'Password must contain at least one number and one uppercase and lowercase letter, and at least 6 and not morethan 30 characters',
+      })  
+} else {
     sweet2()
   }
 }
