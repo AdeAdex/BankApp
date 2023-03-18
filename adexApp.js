@@ -70,6 +70,7 @@ validateAccNoOnload = () => {
 // Function that select between the various help
 
 help = (para) => {
+  variousHelp.style.setProperty("display", "block", "important");
   variousHelp.innerHTML = "";
   if (para == 1) {
     variousHelp.innerHTML = `
@@ -140,11 +141,11 @@ help = (para) => {
         </div>
         <img src="pic/ade.png" alt="" class="login-img" />
       </div>
-      <div class="p-4 all-help">
+      <div class="pt-4 px-4 pb-2" style="margin-top: 60px;">
         <h6 class="text-secondary">Version</h6>
         <span class="fw-bold">2.16.8</span> 
       </div>
-      <hr class="help-hr" />
+      <hr class="" />
     `;
   } else if (para == 4) {
     variousHelp.innerHTML = `
