@@ -520,12 +520,9 @@ signIn = () => {
 
 changePassword = () => {
   let found = false;
-  // let hasNumber = new Regex(r'[0-9]');
-  // let hasLetter = new Regex("[a-zA-Z]+")
-  // let hasMinimum6Chars = new Regex(".{6,}")
-  // let isValidated = hasNumber.contains(newPassword.value) && hasLetter.contains(newPassword.value && hasMinimum6Chars.contains(newPassword.value))
+  let regex = /^(?=.*[a-z])(?=[A-Z])(?=.*\d)(?=.*[#$@!%&_?])[A-Za-z\d#$@!%&_?]{6,30}$/
   for (let index = 0; index < allCustomer.length; index++) {
-    if (oldPassword.value == allCustomer[currentUserIndex].password  && newPassword.value == confirmNewPassword.value) {
+    if (oldPassword.value == allCustomer[currentUserIndex].password  && newPassword.value == confirmNewPassword.value && (newPassword.value.match(regex) && confirmNewPassword.value.match(regex) )) {
       found = true
       allCustomer[currentUserIndex].password = newPassword.value;
       localStorage.setItem('customerPersonalDetails', JSON.stringify(allCustomer))
@@ -541,9 +538,13 @@ changePassword = () => {
         title: 'Try again',
         text: "New Password doesn't match!",
       })
-    } /* else if ( isValidated ) {
-      alert("lai lai")
-    } */ else {
+    } else if (oldPassword.value == allCustomer[currentUserIndex].password  && newPassword.value == confirmNewPassword.value && !(newPassword.value.match(regex) && confirmNewPassword.value.match(regex) )) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Please match the format',
+        text: 'Password must contain at least one number and one uppercase and lowercase letter, and at least 6 and not morethan 30 characters',
+      })
+    } else {
       Swal.fire({
         icon: 'error',
         title: 'Try again',
