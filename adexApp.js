@@ -128,7 +128,22 @@ help = (para) => {
       </div>
     `;
   } else if (para == 2) {
-    variousHelp.innerHTML = `Still Developing this`;
+    variousHelp.innerHTML = `
+    <div class="w-100 login d-flex justify-content-between">
+        <div class="d-flex text-white mt-auto mb-auto">
+          <i
+            class="fas fa-angle-left fs-1"
+            onclick="goBackToHelp()"
+          ></i>
+          <h4>Adex Near Me</h4>
+        </div>
+        <img src="pic/ade.png" alt="" class="login-img" />
+      </div>
+      <div class="pt-4 px-4 pb-2" style="margin-top: 60px;">
+        <div>Working on this Development, check back another time</div>
+      </div>
+      <hr class="" />
+    `;
   } else if (para == 3) {
     variousHelp.innerHTML = `
     <div class="w-100 login d-flex justify-content-between">
@@ -609,10 +624,10 @@ changePin = () => {
 
 // Regex for validating email addresses
 
+let emailRegex =  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 validateEmail = () => {
   let found = false;
   em.style.display = "block";
-  let emailRegex =  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   if (eAddress.value.match(emailRegex)) {
     found = true;
   }
@@ -632,6 +647,8 @@ validateEmail = () => {
 
 // Function that register user and push their registration details
 
+let nameRegex = /[.\w]/
+let numberRegex = /([.\d]{11,14})/
 let allCustomer = [];
 if (localStorage.customerPersonalDetails) {
   allCustomer = JSON.parse(localStorage.getItem("customerPersonalDetails"));
@@ -660,7 +677,18 @@ let toOpenAcc2 = () => {
       text: `This Mobile Number, email or BVN has already been registered. \nKindly proceed to Register device and then Login with your details and if you need any assistance,\nWe are always here to help you. \nContact us: adeoluamole@gmail.com Telephone: 234-7033959586`,
       footer: '<a href="">Why do I have this issue?</a>'
     })
-  } else if (foundInRegistry === false && mNumber.value != "") {
+  } else if (foundInRegistry === false && mNumber.value != "" && !(eAddress.value.match(emailRegex))/*  && !(fName.value.match(nameRegex)) */) {
+    em.style.display = "block";
+    em.innerHTML = 'Please enter a valid email address'
+    em.style.color = 'red'
+    Swal.fire({
+      icon: 'warning',
+      title: 'Try again',
+      text: 'Please fill out all the field and make sure they match the requirement!',
+      // footer: '<a href="">Why do I have this issue?</a>'
+    })
+  }
+  else if (foundInRegistry === false && mNumber.value != "" && eAddress.value.match(emailRegex) /* && (fName.value.match(nameRegex)) */) {
     sweet()
     let customerDetails = {
       phonenumber: mNumber.value,
