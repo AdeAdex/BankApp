@@ -131,9 +131,9 @@ body {
   top: 60px;
 }
 
-/* #variousHelp {
-  height: 10%;
-} */
+.help-body #variousHelp {
+  height: 100%;
+}
 
 .help-container {
   position: relative;
