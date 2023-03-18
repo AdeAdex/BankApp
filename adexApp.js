@@ -463,6 +463,7 @@ if (passGood && pinGood) {
 
 // Function that generate otp and display Acc No on Registration page 3 and display success modal on registration page 3
 continueReg3 = () => {
+  let regex = /^(?=.*[a-z])(?=[A-Z])(?=.*\d)(?=.*[#$@!%&_?])[A-Za-z\d#$@!%&_?]{6,30}$/
   let found = false;
   allCustomer.map((eachUserCon3, index) => {
     if (supplyOTP.value == otp && accPass.value == confirmAccPass.value && transPIN.value == confirmTransPIN.value ) {
@@ -481,13 +482,24 @@ continueReg3 = () => {
         window.location.href = `adexAppHomePage.html`
       }
     })
-  } else if (found && !(allCustomer[currentUserIndex].registeredAcc).includes(allCustomer[currentUserIndex].accNo)) {
+  } else if (found && !(allCustomer[currentUserIndex].registeredAcc).includes(allCustomer[currentUserIndex].accNo) && (accPass.value.match(regex) && confirmAccPass.value.match(regex) )) {
     allCustomer[currentUserIndex].password = accPass.value;
     allCustomer[currentUserIndex].transactionPIN = transPIN.value;
     allCustomer[currentUserIndex].registeredAcc.push(allCustomer[currentUserIndex].accNo)
     localStorage.setItem("customerPersonalDetails", JSON.stringify(allCustomer));
    regSuccessModalContainer.style.display = "block"
-  } else {
+  } else if (found && !(allCustomer[currentUserIndex].registeredAcc).includes(allCustomer[currentUserIndex].accNo) && !(accPass.value.match(regex) && confirmAccPass.value.match(regex) )) {
+	
+
+	
+
+
+
+	
+
+	
+} 
+ else {
     sweet2()
   }
 }
