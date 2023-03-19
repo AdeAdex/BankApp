@@ -504,7 +504,7 @@ continueReg3 = () => {
     Swal.fire({
       icon: 'warning',
       title: 'Operation denied',
-      text: 'You have already registered. Please login to your account!',
+      text: 'You have already registered this device. Please login to your account!',
       footer: '<a href="">Why do I have this issue?</a>'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -542,12 +542,21 @@ signIn = () => {
         localStorage.setItem("currentUserIndex", index);
         found = true;
         return
-      }})
-    if (found) {
+      }
+    })
+    allCustomer.map((loads, index) => {
+    if (found && allCustomer[index].registeredAcc.length != 0) {
       window.location.href = "adexAppDashboardPage.html";
+    } else if ((found == true || found == false) && allCustomer[index].registeredAcc.length == 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Operation Declined',
+        text: "You haven't registered this device, kindly go back and register the device and try again ",
+      })  
     } else {
       sweet2()
     }
+})
     
 }
 
@@ -732,6 +741,7 @@ let toOpenAcc2 = () => {
       depositReceipt: [],
       billReceipt: [],
       registeredAcc: [],
+      transferLimit: 200000,
       atmPIN: `${Math.floor(Math.random() * 10000)}`,
       accNo: `221${Math.floor(Math.random() * 10000000)}`,
       atmCardNumber: `5399${Math.floor(Math.random() * 10000)}${Math.floor(
@@ -748,6 +758,47 @@ let toOpenAcc2 = () => {
     atmView();
   }
 };
+
+
+//Function that set daily transfer limit
+
+changeTransLimitBg = () => {
+  if (transLimit.value.length == 6) {
+    transLimitBtn.style.backgroundColor = "red"
+  } else if (transLimit.value.length <= 6 || transLimit.value.length >= 6 ) {
+    transLimitBtn.style.backgroundColor = "gray"
+  }
+}
+
+myTransferLimit = () => {
+  allCustomer.map((eachUser, index) => {
+    if (transLimit.value > 500000) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Operation Declined',
+        text: 'Your daily transfer limit cant exceed ₦500,000',
+      })
+      validateTransLimit.style.setProperty("display", "none", "important")
+    } else if (transLimit.value != "" && (transLimit.value < 200000)) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Operation Declined',
+        text: 'Your daily transfer limit cant be lower than ₦200,000',
+      })
+      validateTransLimit.style.setProperty("display", "none", "important")
+    } else if (transLimit.value == "") {
+      validateTransLimit.style.setProperty("display", "block", "important")
+    } else {
+      allCustomer[index].transferLimit = transLimit.value
+      localStorage.setItem("customerPersonalDetails", JSON.stringify(allCustomer));
+      Swal.fire({
+        icon: 'success',
+        title: 'Operation Successful',
+        text: `Your daily transfer limit has been set to ₦${allCustomer[index].transferLimit}`,
+      })
+    }
+  })
+}
 
 
 // Forgot password function
