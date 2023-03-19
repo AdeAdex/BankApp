@@ -74,6 +74,7 @@
       </div>
       <div class="d-flex flex-column w-100 mt-4">
         <button
+          data-bs-toggle="modal" data-bs-target="#transferLimitModal"
           class="btn btn btn-white border border-top border-1 d-flex justify-content-between w-100 form-control py-3 bg-white"
         >
           Transfer Limits <i class="fas fa-angle-right"></i>
@@ -413,7 +414,141 @@
   </div>
 </div>
 
+<div class="modal fade" id="transferLimitModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-sm-down">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-between w-100" style="background-color: rgb(235, 0, 0); height: 60px !important; padding: 10px 20px !important;">
+        <div class="d-flex text-white gap-3">
+          <i
+            class="fas fa-arrow-left fs-3 my-auto"
+            onclick="goBack()"
+          ></i>
+          <h4 class="my-auto text-capitalize">transfer limit</h4>
+        </div>
+        <img src="pic/ade.png" alt="" class="login-img"  />
+      </div>
+      <div class="modal-body">
+        <div class="mb-2">
+          <label
+            for="validationCustom02"
+            class="form-label w-100 fs-6"
+            style="text-align: left"
+            >Select an Account</label
+          >
+          <button
+          type="text"
+          class="form-control form-control-md d-flex justify-content-between text-uppercase"
+          id="airtimeMNumber"
+          placeholder=""
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          style="background-color: inherit"
+        >
+          Select Account <i class="fas fa-angle-down my-auto"></i>
+        </button>
+        </div>
+        
+        <h6 class="text-capitalize mt-4 mb-2">select transfer type</h6>
+        <div
+        class="gap-3 d-flex w-100"
+        style="overflow-x: auto; height: 90px"
+      >
+        <button
+          class="btn btn-light border border-danger d-grid py-2 px-3"
+          style="height: 80px; width: 30%; font-size: 12px;"
+        >
+          <div class="d-flex">
+            <div
+              class="w-100 d-flex justify-content-end"
+              id="mySelect1"
+            ></div>
+          </div>
+          <div class="w-75 mt-auto">Adex Transfer</div>
+        </button>
+        <button
+          class="btn btn-light border border-danger d-grid py-2 px-3"
+          style="height: 80px; width: 30%; font-size: 12px;"
+        >
+          <div class="d-flex">
+            <div
+              class="w-100 d-flex justify-content-end"
+              id="mySelect2"
+            ></div>
+          </div>
+          <div class="w-75 mt-auto">Third party Transfer</div>
+        </button>
+      </div>
+        <div class="">
+          <div class="mb-4">
+            <label for="validationCustom02" class="form-label" style="font-size: 14px;"
+              >Limit Amount</label
+            >
+            <input
+              type="number"
+              class="login-input form-control pt-3 pb-3"
+              id="transLimit"
+              value=""
+              required
+              placeholder="Enter Amount"
+              onkeyup="changeTransLimitBg()"
+            />
+            <div class="d-none text-danger" style="font-size: 12px;" id="validateTransLimit">Can't be empty</div>
+            <div class="d-flex flex-column justify-content-end w-100 mt-3" style="font-size: 14px;"> <span class=" ms-auto" style="width: 75%;">This will be your daily transaction limit</span> 
+              <span class=" ms-auto mt-2" style="font-size: 12px; width: 75%;">Minimum transfer limit is ₦200,000 and the maximum transfer limit can''t be more than ₦500,000</span>
+            </div>
+            <hr>
+          </div>
+          <div>
+            <button
+              class="btn btn-secondary w-100 mt-3 mb-4 pt-2 pb-2 text-uppercase"
+              id="transLimitBtn"
+              onclick="myTransferLimit()"
+            >
+              confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
+
+<div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content position-fixed bottom-0 start-0">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Select an Account
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div
+              id="toAirtimetoTransferModal"
+              data-bs-dismiss="modal"
+              class="text-uppercase" style="cursor: pointer;"
+              onclick="pasteValueTransToModal()"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  
     <script src="adexApp.js"></script>
     <script src="bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
