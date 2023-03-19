@@ -254,23 +254,23 @@ goBackToHelp = () => {
 
 // Function that check if the user is online or offline
 
-// let checkNetwork = () => {
-//   if (navigator.onLine) {
-//     networkDiv.style.display = "none"
-//     body.style.pointerEvents = "auto"
-//   } else {
-//     body.style.pointerEvents = "none"
-//     networkDiv.style.display = "block"
-//     networkDiv.innerHTML = `
-//   Network not available
-//       <div class="w-100 pt-2 d-flex justify-content-center">
-//         <div>Reconnecting</div>
-//         <div class="spinner-border text-light mx-2" role="status"></div>
-//       </div>
-//   `
-//   }
+let checkNetwork = () => {
+  if (navigator.onLine) {
+    networkDiv.style.display = "none"
+    body.style.pointerEvents = "auto"
+  } else {
+    body.style.pointerEvents = "none"
+    networkDiv.style.display = "block"
+    networkDiv.innerHTML = `
+  Network not available
+      <div class="w-100 pt-2 d-flex justify-content-center">
+        <div>Reconnecting</div>
+        <div class="spinner-border text-light mx-2" role="status"></div>
+      </div>
+  `
+  }
 
-// }
+}
 
 // Some other Function that reload the page
 let goBack = () => {
@@ -439,20 +439,27 @@ closeMyRegSuccessModal = () => {
 }
 
 
+let regex = /^(?=.*[a-z])(?=[A-Z])(?=.*\d)(?=.*[#$@!%&_?])[A-Za-z\d#$@!%&_?]{6,30}$/
 
 confirmPass = () => {
   con.style.display = `block`
   // con2.style.display = `block`
   passGood = false
   pinGood = false
-  if (accPass.value == confirmAccPass.value) {
+  if (accPass.value == confirmAccPass.value && (accPass.value.match(regex) && confirmAccPass.value.match(regex))) {
       con.innerHTML = `Password match`
       con.style.color = `green`
       passGood = true
-  } else {
+  } else if (accPass.value == confirmAccPass.value && !(accPass.value.match(regex) && confirmAccPass.value.match(regex))) {
+    con.innerHTML = `Password must contain at least one number and one uppercase and lowercase letter, and at least 6 and not morethan 30 characters`
+    con.style.color = `red`
+    con2.style.display = `none`
+    
+  }
+  else {
     con.innerHTML = `Password does not match`
     con.style.color = `red`
-  con2.style.display = `none`
+    con2.style.display = `none`
 
   }
   if (transPIN.value == confirmTransPIN.value) {
@@ -476,10 +483,16 @@ if (passGood && pinGood) {
 }
 }
 
+changeType = () => {
+  if (transPIN.type == "number"  || confirmTransPIN.type == "number") {
+    transPIN.type = "password"
+    confirmTransPIN.type = "password"
+  }
+}
+
 
 // Function that generate otp and display Acc No on Registration page 3 and display success modal on registration page 3
 continueReg3 = () => {
-  let regex = /^(?=.*[a-z])(?=[A-Z])(?=.*\d)(?=.*[#$@!%&_?])[A-Za-z\d#$@!%&_?]{6,30}$/
   let found = false;
   allCustomer.map((eachUserCon3, index) => {
     if (supplyOTP.value == otp && accPass.value == confirmAccPass.value && transPIN.value == confirmTransPIN.value ) {
@@ -487,11 +500,11 @@ continueReg3 = () => {
       return
     }
   })
-  if (found && (allCustomer[currentUserIndex].registeredAcc).includes(allCustomer[currentUserIndex].accNo)) {
+  if (found && (allCustomer[currentUserIndex].registeredAcc).includes(allCustomer[currentUserIndex].accNo) && (accPass.value != "" || transPIN.value != "")) {
     Swal.fire({
       icon: 'warning',
       title: 'Operation denied',
-      text: 'You have successfully registered. Please login to your account!',
+      text: 'You have already registered. Please login to your account!',
       footer: '<a href="">Why do I have this issue?</a>'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -591,6 +604,7 @@ confirmPinMatch = () => {
 
 
 changePin = () => {
+  let pinRegex = /([.\d]{4,4})/
   let found = false;
   for (let index = 0; index < allCustomer.length; index++) {
     if (oldPin.value == allCustomer[currentUserIndex].transactionPIN  && newPin.value == confirmNewPin.value) {
