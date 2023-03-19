@@ -62,13 +62,11 @@
           >Transaction PIN</label
         >
         <input
-          type="password"
-          pattern="[0-9]*"
-          inputmode="numeric"
-          maxlength="4"
+          type="number"
           class="form-control form-control-lg"
           id="transPIN"
-          required
+          onKeyPress="if(this.value.length==4) return false;"
+          onkeydown="changeType()"
         />
       </div>
 
@@ -77,13 +75,12 @@
           >Confirm PIN</label
         >
         <input
-          type="password"
-          pattern="[0-9]*"
-          inputmode="numeric"
-          maxlength="4"
+          type="number"
           class="form-control form-control-lg"
           id="confirmTransPIN"
-          required onkeyup="confirmPass()"
+          onKeyPress="if(this.value.length==4) return false;"
+          onkeydown="changeType()"
+          onkeyup="confirmPass()"
         />
         <div id="con2" style="display: none; margin-top: 2px;" class="con-con"></div>
       </div>
