@@ -483,12 +483,14 @@ if (passGood && pinGood) {
 }
 }
 
-changeType = () => {
-  if (transPIN.type == "number"  || confirmTransPIN.type == "number") {
-    transPIN.type = "password"
-    confirmTransPIN.type = "password"
-  }
-}
+// changeType = () => {
+//   let pinRegex = /^([\d]){4}$/;
+//   if (/* pinRegex.test(transPIN.value) */transPIN.value.match(pinRegex)) {
+//     // transPIN.value = transPIN.value
+//   } else {
+//     // transPIN.value = ""
+//   }
+// }
 
 
 // Function that generate otp and display Acc No on Registration page 3 and display success modal on registration page 3
