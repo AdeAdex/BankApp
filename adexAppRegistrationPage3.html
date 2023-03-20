@@ -65,8 +65,7 @@
           type="number"
           class="form-control form-control-lg"
           id="transPIN"
-          onKeyPress="if(this.value.length==4) return false;"
-          onkeydown="changeType()"
+          onKeyPress="if(this.value.length == 4) return false;"
         />
       </div>
 
@@ -79,7 +78,6 @@
           class="form-control form-control-lg"
           id="confirmTransPIN"
           onKeyPress="if(this.value.length==4) return false;"
-          onkeydown="changeType()"
           onkeyup="confirmPass()"
         />
         <div id="con2" style="display: none; margin-top: 2px;" class="con-con"></div>
