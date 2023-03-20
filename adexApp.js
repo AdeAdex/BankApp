@@ -5,7 +5,7 @@ welcomeMsg =() => {
       window.location.href = "adexAppHomePage.html";
     } else {
     }
-  }, 5000);
+  }, 3000);
 }
 
 
