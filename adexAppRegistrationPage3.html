@@ -62,7 +62,9 @@
           >Transaction PIN</label
         >
         <input
-          type="number"
+          type="password"
+          pattern="[0-9]*"
+          inputmode="numeric"
           class="form-control form-control-lg"
           id="transPIN"
           onKeyPress="if(this.value.length == 4) return false;"
@@ -74,7 +76,9 @@
           >Confirm PIN</label
         >
         <input
-          type="number"
+          type="password"
+          pattern="[0-9]*"
+          inputmode="numeric"
           class="form-control form-control-lg"
           id="confirmTransPIN"
           onKeyPress="if(this.value.length==4) return false;"
