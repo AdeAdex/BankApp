@@ -4,6 +4,7 @@ This BankApp is a web-based mobile banking application that I developed. This ba
 
 
 **Features:**
+
 Account Creation: Users can easily create an account with the bank, providing essential details, including:
 
 (a) Account Number.
