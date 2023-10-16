@@ -16,9 +16,12 @@ Change ATM PIN: Users have the option to change their ATM's default PIN for adde
 
 Device Registration: Register your device to enhance security and accessibility by:
 
-(a) Creating a password
-(b) Setting up a Transaction PIN
-(c) Receiving OTP (One-Time Password)
+(a) Creating a password.
+
+(b) Setting up a Transaction PIN.
+
+(c) Receiving OTP (One-Time Password).
+
 Login Securely: Easily log in to your account by providing your Account Number and Password.
 
 Money Transfers: Perform transactions by making secure money transfers.
