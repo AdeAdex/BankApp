@@ -6,9 +6,10 @@ This BankApp is a web-based mobile banking application that I developed. This ba
 **Features:**
 Account Creation: Users can easily create an account with the bank, providing essential details, including:
 
-(a) Account Number
-(b) ATM Card Information, which includes ATM PIN, ATM Number, ATM Expiry Date, and ATM Name
-(c) Default Balance
+(a) Account Number.
+(b) ATM Card Information, which includes ATM PIN, ATM Number, ATM Expiry Date, and ATM Name.
+(c) Default Balance.
+
 Change ATM PIN: Users have the option to change their ATM's default PIN for added security.
 
 Device Registration: Register your device to enhance security and accessibility by:
