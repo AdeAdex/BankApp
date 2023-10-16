@@ -22,6 +22,7 @@ Device Registration: Register your device to enhance security and accessibility 
 
 (c) Receiving OTP (One-Time Password).
 
+
 Login Securely: Easily log in to your account by providing your Account Number and Password.
 
 Money Transfers: Perform transactions by making secure money transfers.
