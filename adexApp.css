@@ -180,18 +180,9 @@ body {
   content: "Step " counter(section) ": ";
 }
 
-/* .atm {
-  transition: transform .5s ease-in-out;
-}
 
-.atm:hover {
-  transform: rotate(360deg);
-} */
 
 .animate {
-  /* animation-name: fade;
-  animation-timing-function: ;
-  animation-duration: 10ms; */
  animation: fade 1000ms ease-in-out; 
 }
 
